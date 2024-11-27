@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {createRegion, getRegion, updateRegion} from "../services/RegionService.js";
 import {useNavigate, useParams} from "react-router-dom";
 
-const CUDRegionComponent = () => {
+const DCRegionComponent = () => {
 	const [name, setName] = useState('')
 
 	const {id} = useParams();
@@ -35,7 +35,7 @@ const CUDRegionComponent = () => {
 				// update region
 				updateRegion(id, region).then((response) => {
 					console.log(response.data);
-					navigator('/regions');
+					navigator('/dc-regions');
 				}).catch(error => {
 					console.error(error);
 				})
@@ -43,7 +43,7 @@ const CUDRegionComponent = () => {
 				// add region
 				createRegion(region).then((response) => {
 					console.log(response.data);
-					navigator('/regions');
+					navigator('/dc-regions');
 				}).catch(errors => {
 					console.error(errors);
 				})
@@ -104,4 +104,4 @@ const CUDRegionComponent = () => {
 		</div>
 	)
 }
-export default CUDRegionComponent
+export default DCRegionComponent

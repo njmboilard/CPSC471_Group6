@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {deleteRegion, listRegions} from "../services/RegionService.js";
 import {useNavigate} from "react-router-dom";
 
-const CRUDListRegionComponent = () => {
+const DCListRegionComponent = () => {
 
 	const [regions, setRegions] = useState([])
 
@@ -69,4 +69,4 @@ const CRUDListRegionComponent = () => {
 		</div>
 	)
 }
-export default CRUDListRegionComponent
+export default DCListRegionComponent

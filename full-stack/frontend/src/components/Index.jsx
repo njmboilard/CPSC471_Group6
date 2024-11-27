@@ -1,13 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useNavigate} from "react-router-dom";
 
 const Index = () => {
 
 	const navigator = useNavigate();
-	const [password, setPassword] = useState('');
 
 	function reader() {
-		navigator('/reader')
+		navigator('/read-index')
 	}
 
 	function documentController() {
@@ -15,7 +14,7 @@ const Index = () => {
 		const requiredPassword = 'admin';
 
 		if (userPassword === requiredPassword) {
-			navigator('/document-controller')
+			navigator('/dc-index')
 		} else {
 			alert('Incorrect Password. Access Denied.');
 		}
