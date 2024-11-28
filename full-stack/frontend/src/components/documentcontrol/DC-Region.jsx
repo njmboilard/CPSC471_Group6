@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {createRegion, getRegion, updateRegion} from "../services/RegionService.js";
+import {createRegion, getRegion, updateRegion} from "../../services/RegionService.js";
 import {useNavigate, useParams} from "react-router-dom";
 
-const DCRegionComponent = () => {
+const DCRegion = () => {
 	const [name, setName] = useState('')
 
 	const {id} = useParams();
@@ -104,4 +104,4 @@ const DCRegionComponent = () => {
 		</div>
 	)
 }
-export default DCRegionComponent
+export default DCRegion

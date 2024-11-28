@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ReadIndex = () => {
+const RDIndex = () => {
 	return (
 		<div>ReadIndex</div>
 	)
 }
-export default ReadIndex
+export default RDIndex

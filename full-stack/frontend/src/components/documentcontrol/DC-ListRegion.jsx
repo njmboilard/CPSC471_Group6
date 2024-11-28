@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {deleteRegion, listRegions} from "../services/RegionService.js";
+import {deleteRegion, listRegions} from "../../services/RegionService.js";
 import {useNavigate} from "react-router-dom";
 
-const DCListRegionComponent = () => {
+const DCListRegion = () => {
 
 	const [regions, setRegions] = useState([])
 
@@ -21,11 +21,15 @@ const DCListRegionComponent = () => {
 	}
 
 	function addNewRegion() {
-		navigator('/add-region')
+		navigator('/add-region');
+	}
+
+	function DCBack() {
+		navigator('/dc-index');
 	}
 
 	function updateRegion(id) {
-		navigator(`/update-region/${id}`)
+		navigator(`/update-region/${id}`);
 	}
 
 	function removeRegion(id) {
@@ -43,6 +47,7 @@ const DCListRegionComponent = () => {
 			<br/>
 			<h2>Regions</h2>
 			<button className="btn btn-dark mb-2" onClick={addNewRegion}>Add Region</button>
+			<button className="btn btn-dark mb-2" onClick={DCBack} style={{ marginLeft: '10px' }}>Back</button>
 			<table className='table table-striped table-bordered'>
 				<thead>
 					<tr>
@@ -59,7 +64,17 @@ const DCListRegionComponent = () => {
 								<td>{region.name}</td>
 								<td>
 									<button className="btn btn-dark" onClick={() => updateRegion(region.id)}>Update</button>
-									<button className="btn btn-dark" onClick={() => removeRegion(region.id)} style={{marginLeft:'10px'}}>Delete</button>
+									<button
+										className="btn btn-dark"
+										onClick={() => {
+											if (window.confirm('Are you sure you want to delete this region?')) {
+												removeRegion(region.id);
+											}
+										}}
+										style={{marginLeft: '10px'}}
+									>
+										Delete
+									</button>
 								</td>
 							</tr>
 						)
@@ -69,4 +84,4 @@ const DCListRegionComponent = () => {
 		</div>
 	)
 }
-export default DCListRegionComponent
+export default DCListRegion
