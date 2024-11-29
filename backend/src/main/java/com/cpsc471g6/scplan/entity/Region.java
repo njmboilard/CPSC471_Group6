@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,4 +22,7 @@ public class Region {
 
 	@Column(name="name", nullable = false, unique = true)
 	private String name;
+
+	@OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Subdivision> subdivisions = new ArrayList<>();
 }

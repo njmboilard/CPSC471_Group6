@@ -67,7 +67,7 @@ const DCListRegion = () => {
 									<button
 										className="btn btn-dark"
 										onClick={() => {
-											if (window.confirm('Are you sure you want to delete this region?')) {
+											if (window.confirm("Are you sure you want to delete region " + region.id + "?")) {
 												removeRegion(region.id);
 											}
 										}}

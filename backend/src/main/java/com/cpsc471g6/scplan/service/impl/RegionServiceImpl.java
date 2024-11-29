@@ -2,8 +2,10 @@ package com.cpsc471g6.scplan.service.impl;
 
 import com.cpsc471g6.scplan.dto.RegionDto;
 import com.cpsc471g6.scplan.entity.Region;
+import com.cpsc471g6.scplan.entity.Subdivision;
 import com.cpsc471g6.scplan.exception.ResourceNotFoundException;
 import com.cpsc471g6.scplan.mapper.RegionMapper;
+import com.cpsc471g6.scplan.mapper.SubdivisionMapper;
 import com.cpsc471g6.scplan.repository.RegionRepository;
 import com.cpsc471g6.scplan.service.RegionService;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,17 @@ public class RegionServiceImpl implements RegionService {
 	@Override
 	public RegionDto createRegion(RegionDto regionDto) {
 		Region region = RegionMapper.mapToRegion(regionDto);
+
+		if (regionDto.getSubdivisions() != null) {
+			List<Subdivision> subdivisions = regionDto.getSubdivisions().stream()
+					.map(subdivisionDto -> {
+						Subdivision subdivision = SubdivisionMapper.mapToSubdivision(subdivisionDto, region);
+						subdivision.setRegion(region);
+						return subdivision;
+					})
+					.collect(Collectors.toList());
+			region.setSubdivisions(subdivisions);
+		}
 		Region savedRegion = regionRepository.save(region);
 		return RegionMapper.mapToRegionDto(savedRegion);
 	}
@@ -35,8 +48,7 @@ public class RegionServiceImpl implements RegionService {
 	@Override
 	public List<RegionDto> getAllRegions() {
 		List<Region> regions = regionRepository.findAll();
-		return regions.stream().map((region) ->
-				RegionMapper.mapToRegionDto(region)).collect(Collectors.toList());
+		return regions.stream().map(RegionMapper::mapToRegionDto).collect(Collectors.toList());
 	}
 
 	@Override
