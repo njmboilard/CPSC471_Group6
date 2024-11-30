@@ -21,15 +21,15 @@ const DCListRegion = () => {
 	}
 
 	function addNewRegion() {
-		navigator('/add-region');
+		navigator('/documentcontrol/regions/add');
 	}
 
-	function DCBack() {
-		navigator('/dc-index');
+	function back() {
+		navigator('/documentcontrol');
 	}
 
 	function updateRegion(id) {
-		navigator(`/update-region/${id}`);
+		navigator(`/documentcontrol/regions/update/${id}`);
 	}
 
 	function removeRegion(id) {
@@ -42,12 +42,17 @@ const DCListRegion = () => {
 		})
 	}
 
+	function subdivision(id) {
+		console.log(id);
+		navigator(`/documentcontrol/regions/${id}/subdivisions`);
+	}
+
 	return (
 		<div className='container'>
 			<br/>
 			<h2>Regions</h2>
 			<button className="btn btn-dark mb-2" onClick={addNewRegion}>Add Region</button>
-			<button className="btn btn-dark mb-2" onClick={DCBack} style={{ marginLeft: '10px' }}>Back</button>
+			<button className="btn btn-dark mb-2" onClick={back} style={{ marginLeft: '10px' }}>Back</button>
 			<table className='table table-striped table-bordered'>
 				<thead>
 					<tr>
@@ -75,6 +80,7 @@ const DCListRegion = () => {
 									>
 										Delete
 									</button>
+									<button className="btn btn-dark" onClick={() => subdivision(region.id)} style={{marginLeft: '10px'}}>Subdivisions</button>
 								</td>
 							</tr>
 						)

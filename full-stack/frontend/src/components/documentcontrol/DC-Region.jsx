@@ -35,7 +35,7 @@ const DCRegion = () => {
 				// update region
 				updateRegion(id, region).then((response) => {
 					console.log(response.data);
-					navigator('/dc-regions');
+					navigator('/documentcontrol/regions');
 				}).catch(error => {
 					console.error(error);
 				})
@@ -43,7 +43,7 @@ const DCRegion = () => {
 				// add region
 				createRegion(region).then((response) => {
 					console.log(response.data);
-					navigator('/dc-regions');
+					navigator('/documentcontrol/regions');
 				}).catch(errors => {
 					console.error(errors);
 				})

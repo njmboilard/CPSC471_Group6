@@ -43,7 +43,7 @@ public class SubdivisionController {
 	}
 
 	// Build Update Subdivision REST API
-	@PutMapping
+	@PutMapping("{chopCode}")
 	public ResponseEntity<SubdivisionDto> updateSubdivision(@PathVariable("regionId") int regionId,
 	                                                        @PathVariable("chopCode") String chopCode,
 	                                                        @RequestBody SubdivisionDto updatedSubdivision) {
@@ -52,7 +52,7 @@ public class SubdivisionController {
 	}
 
 	// Build Delete Subdivision REST API
-	@DeleteMapping
+	@DeleteMapping("{chopCode}")
 	public ResponseEntity<String> deleteSubdivision(@PathVariable("regionId") int regionId,
 	                                                @PathVariable("chopCode") String chopCode) {
 		subdivisionService.deleteSubdivision(regionId, chopCode);

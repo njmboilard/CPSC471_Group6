@@ -6,7 +6,7 @@ const Index = () => {
 	const navigator = useNavigate();
 
 	function reader() {
-		navigator('/read-index')
+		navigator('/reader')
 	}
 
 	function documentController() {
@@ -14,7 +14,7 @@ const Index = () => {
 		const requiredPassword = 'admin';
 
 		if (userPassword === requiredPassword) {
-			navigator('/dc-index')
+			navigator('/documentcontrol')
 		} else {
 			alert('Incorrect Password. Access Denied.');
 		}
@@ -27,7 +27,7 @@ const Index = () => {
 				<div className="row">
 					<div className="card col-md-6 offset-md-3 offset-md-3">
 						<button className="btn btn-dark mb-2" onClick={reader} style={{marginTop: '10px'}}>Reader</button>
-						<button className="btn btn-dark mb-2" onClick={documentController} style={{marginTop: '10px'}}>Document Controller</button>
+						<button className="btn btn-dark mb-2" onClick={documentController} style={{marginTop: '10px'}}>Document Control</button>
 					</div>
 				</div>
 			</div>
