@@ -1,6 +1,5 @@
 package com.cpsc471g6.scplan.dto;
 
-import com.cpsc471g6.scplan.entity.Region;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

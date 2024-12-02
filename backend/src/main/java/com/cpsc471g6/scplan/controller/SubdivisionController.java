@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin("*")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/subdivisions")
+@RequestMapping("/api/regions/{regionId}/subdivisions")
 
 public class SubdivisionController {
 	private SubdivisionService subdivisionService;
