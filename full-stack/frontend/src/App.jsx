@@ -11,7 +11,9 @@ import DCListRegion from "./components/documentcontrol/DC-ListRegion.jsx";
 import Reader from "./components/read/Reader.jsx";
 import RDListRegion from "./components/read/RD-ListRegion.jsx";
 import DCRegion from "./components/documentcontrol/DC-Region.jsx";
-import RdListSubdivision from "./components/read/RD-ListSubdivision.jsx";
+import RDListSubdivision from "./components/read/RD-ListSubdivision.jsx";
+import RDListLocation from "./components/read/RD-ListLocation.jsx";
+import RDListPlan from './components/read/RD-ListPlan.jsx';
 
 function App() {
 
@@ -32,7 +34,13 @@ function App() {
                 <Route path='/reader/regions' element={<RDListRegion />}></Route>
 
                 {/* http://localhost:3000/reader/regions/#/subdivisions*/}
-                <Route path='/reader/regions/:id/subdivisions' element={<RdListSubdivision />}></Route>
+                <Route path='/reader/regions/:id/subdivisions' element={<RDListSubdivision />}></Route>
+
+                {/* http://localhost:3000/reader/regions/#/subdivisions/chopcode/locations*/}
+                <Route path='/reader/regions/:id/subdivisions/:chopcode/locations' element={<RDListLocation />}></Route>
+
+                {/* http://localhost:3000/reader/regions/#/subdivisions/chopcode/locations/mileage/plans*/}
+                <Route path='/reader/regions/:id/subdivisions/:chopcode/locations/:mileage/plans' element={<RDListPlan />}></Route>
 
                 {/* Document Control ------------------------------------------------------------------------------- */}
 
