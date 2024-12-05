@@ -14,6 +14,10 @@ import DCRegion from "./components/documentcontrol/DC-Region.jsx";
 import RDListSubdivision from "./components/read/RD-ListSubdivision.jsx";
 import RDListLocation from "./components/read/RD-ListLocation.jsx";
 import RDListPlan from './components/read/RD-ListPlan.jsx';
+import RDListProject from './components/read/RD-ListProject.jsx';
+import RDListAssignedPlan from './components/read/RD-ListAssignedPlan.jsx';
+import RDListIssue from './components/read/RD-ListIssue.jsx';
+import RDListPersonnel from './components/read/RD-ListPersonnel.jsx';
 
 function App() {
 
@@ -41,6 +45,18 @@ function App() {
 
                 {/* http://localhost:3000/reader/regions/#/subdivisions/chopcode/locations/mileage/plans*/}
                 <Route path='/reader/regions/:id/subdivisions/:chopcode/locations/:mileage/plans' element={<RDListPlan />}></Route>
+
+                {/* http://localhost:3000/reader/projects */}
+                <Route path='/reader/projects' element={<RDListProject />}></Route>
+
+                {/* http://localhost:3000/reader/projects/#/personnel */}
+                <Route path='/reader/projects/:id/personnel' element={<RDListPersonnel />}></Route>
+
+                {/* http://localhost:3000/reader/projects/#/assignedplans */}
+                <Route path='/reader/projects/:id/assignedplans' element={<RDListAssignedPlan />}></Route>
+
+                {/* http://localhost:3000/reader/projects/#/issues */}
+                <Route path='/reader/projects/:id/issues' element={<RDListIssue />}></Route>
 
                 {/* Document Control ------------------------------------------------------------------------------- */}
 

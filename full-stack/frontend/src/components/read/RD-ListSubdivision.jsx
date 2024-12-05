@@ -28,9 +28,9 @@ const RdListSubdivision = () => {
 
 			// test data to be deleted after
 			const dummySubdivisions = [
-				{ chopCode: 'BELL', name: 'Belleville' },
-				{ chopCode: 'WINC', name: 'Winchester' },
-				{ chopCode: 'REDE', name: 'Red Deer' },
+				{ regionID: 1, chopCode: 'BELL', name: 'Belleville' },
+				{ regionID: 1, chopCode: 'WINC', name: 'Winchester' },
+				{ regionID: 1, chopCode: 'REDE', name: 'Red Deer' },
 			  ];
 			const dummyRegionName = "Dummy Region";
 
@@ -55,6 +55,7 @@ const RdListSubdivision = () => {
 			<table className='table table-striped table-bordered'>
 				<thead>
 					<tr>
+						<th>Region ID</th>
 						<th>Chop Code</th>
 						<th>Subdivision Name</th>
 						<th>Actions</th>
@@ -64,6 +65,7 @@ const RdListSubdivision = () => {
 					{
 						subdivisions.map(subdivision =>
 							<tr key={subdivision.chopCode}>
+								<td>{subdivision.regionID}</td>
 								<td>{subdivision.chopCode}</td>
 								<td>{subdivision.name}</td>
 								<td>

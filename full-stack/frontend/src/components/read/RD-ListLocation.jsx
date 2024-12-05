@@ -20,9 +20,9 @@ const RDListLocation = () => {
 
             // test data to be deleted after
 			const dummyLocations = [
-				{ mileage: '0.25', type: 'Signals - Controlled', name: 'Smiths Falls Centre' },
-				{ mileage: '1.43', type: 'Grade Crossing Warning System', name: 'Carroll Road' },
-				{ mileage: '2.00', type: 'Signals - Automatic', name: 'Glenview Road' },
+				{ chopCode: "BELL", mileage: '0.25', type: 'Signals - Controlled', name: 'Smiths Falls Centre' },
+				{ chopCode: "BELL", mileage: '1.43', type: 'Grade Crossing Warning System', name: 'Carroll Road' },
+				{ chopCode: "BELL", mileage: '2.00', type: 'Signals - Automatic', name: 'Glenview Road' },
 			  ];
 			const dummySubdivisionName = "Dummy Subdivision";
 
@@ -40,6 +40,8 @@ const RDListLocation = () => {
 		navigator(`/reader/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
 	}
 
+
+    // NOTE: the keys might need to be modified since only one is listed here but there are multiple
     return (
         <div className='container'><br />
 			<h2>{subdivisionName} Locations</h2>
@@ -47,6 +49,7 @@ const RDListLocation = () => {
 			<table className='table table-striped table-bordered'>
 				<thead>
 					<tr>
+                        <th>Chop Code</th>
 						<th>Mileage</th>
 						<th>Location Type</th>
 						<th>Location Name</th>
@@ -57,6 +60,7 @@ const RDListLocation = () => {
 					{
 						locations.map(location =>
 							<tr key={location.mileage}>
+                                <td>{location.chopCode}</td>
 								<td>{location.mileage}</td>
 								<td>{location.type}</td>
                                 <td>{location.name}</td>
