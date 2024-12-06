@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import {deleteRegion, listRegions} from "../../services/RegionService.js";
 import {useNavigate} from "react-router-dom";
+import {deleteRegion, listRegions} from "../../services/RegionService.js";
 
 const DCListRegion = () => {
 
@@ -13,38 +13,46 @@ const DCListRegion = () => {
 	}, [])
 
 	function getAllRegions() {
-		listRegions().then((response) => {
-			setRegions(response.data);
-		}).catch(error => {
-			console.log(error);
-		})
-	}
+		//listRegions().then((response) => {
+		//	setRegions(response.data);
+		//}).catch(error => {
+		//	console.log(error);
+		//})
 
-	function addNewRegion() {
-		navigator('/documentcontrol/regions/add');
+		// test data to be deleted after
+		const dummyRegions = [
+			{ id: 1, name: "Canada" },
+			{ id: 2, name: "Utah" },
+			{ id: 3, name: "Soviet Russia"},
+		];
+		setRegions(dummyRegions);
 	}
 
 	function back() {
 		navigator('/documentcontrol');
 	}
 
-	function updateRegion(id) {
-		navigator(`/documentcontrol/regions/update/${id}`);
+	function addNewRegion() {
+		navigator('/documentcontrol/regions/add');
 	}
 
-	function removeRegion(id) {
-		console.log(id);
+	function updateRegion(regionId) {
+		navigator(`/documentcontrol/regions/update/${regionId}`);
+	}
 
-		deleteRegion(id).then((response) => {
+	function removeRegion(regionId) {
+		console.log(regionId);
+
+		deleteRegion(regionId).then((response) => {
 			getAllRegions();
 		}).catch(error => {
 			console.error(error);
 		})
 	}
 
-	function subdivision(id) {
-		console.log(id);
-		navigator(`/documentcontrol/regions/${id}/subdivisions`);
+	function subdivision(regionId) {
+		console.log(regionId);
+		navigator(`/documentcontrol/regions/${regionId}/subdivisions`);
 	}
 
 	return (

@@ -26,7 +26,6 @@ const RDListPlan = () => {
               ];
             const dummyLocationName = "Dummy Location";
 
-
             setPlans(dummyPlans);
             setLocationName(dummyLocationName);
         }
