@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {createRegion, getRegion, updateRegion} from "../../services/RegionService.js";
 import {useNavigate, useParams} from "react-router-dom";
+import {createRegion, getRegion, updateRegion} from "../../services/RegionService.js";
 
 const DCRegion = () => {
 	const [name, setName] = useState('')
-
-	const {id} = useParams();
+	const {id : regionId} = useParams();
 
 	const [errors, setErrors] = useState({
 		name: ''
@@ -14,14 +13,14 @@ const DCRegion = () => {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		if(id) {
-			getRegion(id).then((response) => {
+		if(regionId) {
+			getRegion(regionId).then((response) => {
 				setName(response.data.name);
 			}).catch(error => {
 				console.error(error);
 			})
 		}
-	}, [id])
+	}, [regionId])
 
 	function saveOrUpdateRegion(e) {
 		e.preventDefault();
@@ -31,9 +30,9 @@ const DCRegion = () => {
 			const region = {name}
 			console.log(region)
 
-			if (id) {
+			if (regionId) {
 				// update region
-				updateRegion(id, region).then((response) => {
+				updateRegion(regionId, region).then((response) => {
 					console.log(response.data);
 					navigator('/documentcontrol/regions');
 				}).catch(error => {
@@ -67,11 +66,16 @@ const DCRegion = () => {
 	}
 
 	function pageTitle() {
-		if (id) {
+		if (regionId) {
 			return <h2>Update Region</h2>
 		} else {
 			return <h2>Add Region</h2>
 		}
+	}
+
+	function back(e) {
+		e.preventDefault();
+		navigator('/documentcontrol/regions');
 	}
 
 	return (
@@ -82,8 +86,8 @@ const DCRegion = () => {
 					{pageTitle()}
 					<div className="card-body">
 						<form>
-							<div className="form-group mb-2">
-								<label className="form-label">Name</label>
+							<div className="form-group mb-3">
+								<label className="form-label">Region Name</label>
 								<input
 									type="text"
 									placeholder="Name"
@@ -95,8 +99,8 @@ const DCRegion = () => {
 								</input>
 								{errors.name && <div className="invalid-feedback">{errors.name}</div>}
 							</div>
-
 							<button className="btn btn-dark mb-2" onClick={saveOrUpdateRegion}>Submit</button>
+							<button className="btn btn-dark mb-2" onClick={back} style={{ marginLeft: '10px' }}>Back</button>
 						</form>
 					</div>
 				</div>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
 // more imports needed here
 
-const RDListIssue = () => {
+const DCListIssue = () => {
 
     const [issues, setIssues] = useState([]);
     const {id : projectId} = useParams();
@@ -33,13 +33,28 @@ const RDListIssue = () => {
     }, [projectId]);
 
     function back() {
-        navigator(`/reader/projects`);
+        navigator(`/documentcontrol/projects`);
     }
+
+    function addNewIssue() {
+		navigator(`/documentcontrol/projects/${projectId}/issues/add`);
+	}
+
+	function updateIssue(issueId) {
+		navigator(`/documentcontrol/projects/${projectId}/issues/update/${issueId}`);
+	}
+
+	function removeIssue(issueId) {
+		console.log(issueId);
+
+		// remove issue logic here
+	}
 
     return (
         <div className='container'><br />
             <h2>{projectName} Issues</h2>
-            <button className="btn btn-dark mb-2" onClick={back}>Back</button>
+            <button className="btn btn-dark mb-2" onClick={addNewIssue}>Add Issue</button>
+            <button className="btn btn-dark mb-2" onClick={back} style={{ marginLeft: '10px' }}>Back</button>
             <table className='table table-striped table-bordered'>
                 <thead>
                     <tr>
@@ -48,6 +63,7 @@ const RDListIssue = () => {
                         <th>Issue Status</th>
                         <th>Project ID</th>
                         <th>Employee ID</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +75,20 @@ const RDListIssue = () => {
                                 <td>{issue.status}</td>
                                 <td>{issue.projectId}</td>
                                 <td>{issue.employeeId}</td>
+                                <td>
+                                    <button className="btn btn-dark" onClick={() => updateIssue(issue.id)}>Update</button>
+								    <button
+								    	className="btn btn-dark"
+								    	onClick={() => {
+								    		if (window.confirm("Are you sure you want to delete issue " + issue.id + "?")) {
+								    			removeIssue(issue.id);
+								    		}
+								    	}}
+								    	style={{marginLeft: '10px'}}
+								    >
+								    	Delete
+								    </button>
+							    </td>
                             </tr>
                         )
                     }
@@ -68,4 +98,4 @@ const RDListIssue = () => {
     )
 };
 
-export default RDListIssue;
+export default DCListIssue;

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 // more imports needed here
 
-const RDListProject = () => {
+const DCListProject = () => {
 
 	const [projects, setProjects] = useState([])
 
@@ -25,28 +25,43 @@ const RDListProject = () => {
 	}
 
 	function back() {
-		navigator('/reader');
+		navigator('/documentcontrol');
+	}
+
+    function addNewProject() {
+		navigator(`/documentcontrol/projects/add`);
+	}
+
+	function updateProject(projectId) {
+		navigator(`/documentcontrol/projects/update/${projectId}`);
+	}
+
+	function removeProject(projectId) {
+		console.log(projectId);
+
+		// remove plan logic here
 	}
 
     function personnel(projectId) {
 		console.log(projectId);
-		navigator(`/reader/projects/${projectId}/personnel`);
+		navigator(`/documentcontrol/projects/${projectId}/personnel`);
 	}
 
 	function assignedPlan(projectId) {
 		console.log(projectId);
-		navigator(`/reader/projects/${projectId}/assignedplans`);
+		navigator(`/documentcontrol/projects/${projectId}/assignedplans`);
 	}
 
     function issues(projectId) {
 		console.log(projectId);
-		navigator(`/reader/projects/${projectId}/issues`);
+		navigator(`/documentcontrol/projects/${projectId}/issues`);
 	}
 
 	return (
 		<div className='container'><br/>
 			<h2>Projects</h2>
-			<button className="btn btn-dark mb-2" onClick={back}>Back</button>
+            <button className="btn btn-dark mb-2" onClick={addNewProject}>Add Project</button>
+			<button className="btn btn-dark mb-2" onClick={back} style={{ marginLeft: '10px' }}>Back</button>
 			<table className='table table-striped table-bordered'>
 				<thead>
 					<tr>
@@ -68,14 +83,26 @@ const RDListProject = () => {
                             <td>{project.status}</td>
                             <td>{project.dlEmployeeId}</td>
 							<td>
+                                <button className="btn btn-dark" onClick={() => updateProject(project.id)}>Update</button>
+								<button
+									className="btn btn-dark"
+									onClick={() => {
+										if (window.confirm("Are you sure you want to delete project " + project.id + "?")) {
+											removeProject(project.id);
+										}
+									}}
+									style={{marginLeft: '10px'}}
+								>
+									Delete
+								</button>
                                 <button className="btn btn-dark" onClick={() => personnel(project.id)}
-                                    style={{marginRight: '10px'}}>Personnel
+                                    style={{marginLeft: '10px'}}>Personnel
                                 </button>
 								<button className="btn btn-dark" onClick={() => assignedPlan(project.id)}
-                                    style={{marginRight: '10px'}}>Assigned Plans
+                                    style={{marginLeft: '10px'}}>Assigned Plans
                                 </button>
-                                <button className="btn btn-dark" onClick={() => issues(project.id)}>
-                                    Issues
+                                <button className="btn btn-dark" onClick={() => issues(project.id)}
+                                    style={{marginLeft: '10px'}}>Issues
                                 </button>
 							</td>
 						</tr>
@@ -86,4 +113,4 @@ const RDListProject = () => {
 		</div>
 	)
 }
-export default RDListProject
+export default DCListProject
