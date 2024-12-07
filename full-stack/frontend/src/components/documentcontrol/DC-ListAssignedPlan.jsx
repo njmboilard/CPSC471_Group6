@@ -64,6 +64,20 @@ const DCListAssignedPlan = () => {
                                 <td>{assignedPlan.drawingNumber}</td>
                                 <td>{assignedPlan.planType}</td>
                                 <td>{assignedPlan.projectId}</td>
+                                <td>
+                                    <button className="btn btn-dark" onClick={() => updateIssue(issue.id)}>Update</button>
+								    <button
+								    	className="btn btn-dark"
+								    	onClick={() => {
+								    		if (window.confirm("Are you sure you want to delete issue " + issue.id + "?")) {
+								    			removeIssue(issue.id);
+								    		}
+								    	}}
+								    	style={{marginLeft: '10px'}}
+								    >
+								    	Delete
+								    </button>
+							    </td>
                             </tr>
                         )
                     }
