@@ -27,8 +27,14 @@ import DCPlan from './components/documentcontrol/DC-Plan.jsx';
 import DCListProject from './components/documentcontrol/DC-ListProject.jsx';
 import DCProject from './components/documentcontrol/DC-Project.jsx';
 import DCListIssue from './components/documentcontrol/DC-ListIssue.jsx';
+import DCIssue from './components/documentcontrol/DC-Issue.jsx';
 import DCListAssignedPlan from './components/documentcontrol/DC-ListAssignedPlan.jsx';
 import DCListPersonnel from './components/documentcontrol/DC-ListPersonnel.jsx';
+import DCPersonnel from './components/documentcontrol/DC-Personnel.jsx';
+import DCProjectManager from './components/documentcontrol/DC-ProjectManager.jsx';
+import DCContractDesigner from './components/documentcontrol/DC-ContractDesigner.jsx';
+import DCInHouseDesigner from './components/documentcontrol/DC-InHouseDesigner.jsx';
+import DCFieldStaff from './components/documentcontrol/DC-FieldStaff.jsx';
 
 function App() {
 
@@ -122,11 +128,41 @@ function App() {
                 {/* http://localhost:3000/documentcontrol/projects/#/issues */}
                 <Route path='/documentcontrol/projects/:id/issues' element={<DCListIssue />}></Route>
 
+                {/* http://localhost:3000/documentcontrol/projects/#/issues */}
+                <Route path='/documentcontrol/projects/:id/issues/add' element={<DCIssue />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/issues */}
+                <Route path='/documentcontrol/projects/:id/issues/update/:issueid' element={<DCIssue />}></Route>
+
                 {/* http://localhost:3000/documentcontrol/projects/#/assignedplans */}
                 <Route path='/documentcontrol/projects/:id/assignedplans' element={<DCListAssignedPlan />}></Route>
 
-                {/* http://localhost:3000/documentcontrol/projects/#/assignedplans */}
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel */}
                 <Route path='/documentcontrol/projects/:id/personnel' element={<DCListPersonnel />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/add/type */}
+                <Route path='/documentcontrol/projects/:id/personnel/add/projectmanager' element={<DCProjectManager />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/update/type/# */}
+                <Route path='/documentcontrol/projects/:id/personnel/update/projectmanager/:pmid' element={<DCProjectManager />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/add/type */}
+                <Route path='/documentcontrol/projects/:id/personnel/add/contractdesigner' element={<DCContractDesigner />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/update/type/# */}
+                <Route path='/documentcontrol/projects/:id/personnel/update/contractdesigner/:cdid' element={<DCContractDesigner />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/add/type */}
+                <Route path='/documentcontrol/projects/:id/personnel/add/inhousedesigner' element={<DCInHouseDesigner />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/update/type/# */}
+                <Route path='/documentcontrol/projects/:id/personnel/update/inhousedesigner/:ihdid' element={<DCInHouseDesigner />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/add/type */}
+                <Route path='/documentcontrol/projects/:id/personnel/add/fieldstaff' element={<DCFieldStaff />}></Route>
+
+                {/* http://localhost:3000/documentcontrol/projects/#/personnel/update/type/# */}
+                <Route path='/documentcontrol/projects/:id/personnel/update/fieldstaff/:fsid' element={<DCFieldStaff />}></Route>
 
             </Routes>
             <FooterComponent />
