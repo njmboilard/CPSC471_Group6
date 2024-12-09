@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-// more imports needed here
+import {getLocation, listPlans} from "../../services/RegionService.js";
 
 const RDListPlan = () => {
 
@@ -12,30 +12,30 @@ const RDListPlan = () => {
 
     useEffect(() => {
         if (mileage) {
-            // Insert Fetch plans
-            //listPlans(regionId, chopCode, mileage).then((response) => {
-			//	setPlans(response.data);
-			//}).catch(error => {
-			//	console.error(error);
-			//});
+            // Fetch plans
+            listPlans(regionId, chopCode, mileage).then((response) => {
+				setPlans(response.data);
+			}).catch(error => {
+				console.error(error);
+			});
 
-            // Insert Fetch location name
-			//getRegion(regionId).then((response) => {
-			//	setRegionName(response.data.name);
-			//}).catch(error => {
-			//	console.error(error);
-			//});
+            // Fetch location name
+			getLocation(regionId, chopCode, mileage).then((response) => {
+				setLocationName(response.data.name);
+			}).catch(error => {
+				console.error(error);
+			});
 
             // test data to be deleted after
-            const dummyPlans = [
-                { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL000.25FG_SW_1', uploadDate: '2023-10-13', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
-                { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FA_JP_1', uploadDate: '2020-04-08', assignedStatus: 'FALSE', archiveStatus: 'Historical' },
-                { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FE_SL_1', uploadDate: '2021-10-24', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
-              ];
-            const dummyLocationName = "Dummy Location";
+            //const dummyPlans = [
+            //    { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL000.25FG_SW_1', uploadDate: '2023-10-13', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
+            //    { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FA_JP_1', uploadDate: '2020-04-08', assignedStatus: 'FALSE', archiveStatus: 'Historical' },
+            //    { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FE_SL_1', uploadDate: '2021-10-24', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
+            //  ];
+            //const dummyLocationName = "Dummy Location";
 
-            setPlans(dummyPlans);
-            setLocationName(dummyLocationName);
+            //setPlans(dummyPlans);
+            //setLocationName(dummyLocationName);
         }
     }, [mileage]);
 

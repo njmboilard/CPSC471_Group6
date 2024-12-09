@@ -27,3 +27,14 @@ export const deleteSubdivision = (regionId, chopCode) =>	axios.delete(`${REST_AP
 // Location CRUD operations for a specific subdivision
 
 export const listLocations = (regionId, chopCode) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations`);
+
+// Plan CRUD operations for a specific location
+export const listPlans = (regionId, chopCode, mileage) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
+
+export const createPlan = (regionId, chopCode, mileage, plan) =>	axios.post(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`, plan);
+
+export const getPlan = (regionId, chopCode, mileage, drawingNumber) =>	axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`);
+
+export const updatePlan = (regionId, chopCode, mileage, drawingNumber, plan) =>	axios.put(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`, plan);
+
+export const deletePlan = (regionId, chopCode, mileage, drawingNumber) =>	axios.delete(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`);
