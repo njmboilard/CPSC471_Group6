@@ -19,19 +19,16 @@ const DCPlan = () => {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		// commented out since getPlan does not exist yet
-        // not sure about parameters hence the (?)
-
-		//if(drawingNumber) {
-		//	getPlan( (?) ).then((response) => {
-		//		setPlanDrawingNumber(response.data.planDrawingNumber);
-		//		setPlanUploadDate(response.data.planUploadDate);
-        //		setPlanAssignedStatus(response.data.planAssignedStatus);
-        //		setPlanArchiveStatus(response.data.planArchiveStatus);
-		//	}).catch(error => {
-		//		console.error(error);
-		//	})
-		//}
+		if(drawingNumber) {
+			getPlan(regionId, chopCode, mileage, drawingNumber).then((response) => {
+				setPlanDrawingNumber(response.data.drawingNumber);
+				setPlanUploadDate(response.data.uploadDate);
+        		setPlanAssignedStatus(response.data.assignedStatus);
+        		setPlanArchiveStatus(response.data.archiveStatus);
+			}).catch(error => {
+				console.error(error);
+			})
+		}
 	}, [drawingNumber])
 
 	function saveOrUpdatePlan(e) {
@@ -39,33 +36,32 @@ const DCPlan = () => {
 
 		if (validateForm()) {
 
-			const plan = {chopCode, mileage, planDrawingNumber, planUploadDate, planAssignedStatus, planArchiveStatus}
+			const plan = {
+                //chopCode, 
+                //mileage, 
+                drawingNumber : planDrawingNumber, 
+                uploadDate : planUploadDate, 
+                assignedStatus : planAssignedStatus, 
+                archiveStatus : planArchiveStatus
+            }
 			console.log(plan)
 
 			if (drawingNumber) {
 				// update plan
-
-				// commented out since updatePlan does not exist yet
-				// not sure about parameters hence the (?)
-
-				//updatePlan( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
-				//}).catch(error => {
-				//	console.error(error);
-				//})
+				updatePlan(regionId, chopCode, mileage, drawingNumber, plan).then((response) => {
+					console.log(response.data);
+					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
+				}).catch(error => {
+					console.error(error);
+				})
 			} else {
 				// add plan
-
-				// commented out since createPlan does not exist yet
-				// not sure about parameters hence the (?)
-
-				//createPlan( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
-				//}).catch(errors => {
-				//	console.error(errors);
-				//})
+				createPlan(regionId, chopCode, mileage, plan).then((response) => {
+					console.log(response.data);
+					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
+				}).catch(errors => {
+					console.error(errors);
+				})
 			}
 		}
 	}

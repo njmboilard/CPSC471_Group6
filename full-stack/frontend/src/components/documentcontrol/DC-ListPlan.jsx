@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-// more imports needed here
+import {getLocation, listPlans} from "../../services/RegionService.js";
 
 const DCListPlan = () => {
 
@@ -12,24 +12,36 @@ const DCListPlan = () => {
 
 	useEffect(() => {
 		if (mileage) {
-			// Insert Fetch plans
+			// Fetch plans
+            getAllPlans();
 
-
-			// Insert Fetch location name
-
+			// Fetch location name
+            getLocation(regionId, chopCode, mileage).then((response) => {
+				setLocationName(response.data.name);
+			}).catch(error => {
+				console.error(error);
+			});
 
 			// test data to be deleted after
-            const dummyPlans = [
-                { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL000.25FG_SW_1', uploadDate: '2023-10-13', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
-                { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FA_JP_1', uploadDate: '2020-04-08', assignedStatus: 'FALSE', archiveStatus: 'Historical' },
-                { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FE_SL_1', uploadDate: '2021-10-24', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
-              ];
-            const dummyLocationName = "Dummy Location";
+            //const dummyPlans = [
+            //    { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL000.25FG_SW_1', uploadDate: '2023-10-13', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
+            //    { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FA_JP_1', uploadDate: '2020-04-08', assignedStatus: 'FALSE', archiveStatus: 'Historical' },
+            //    { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FE_SL_1', uploadDate: '2021-10-24', assignedStatus: 'FALSE', archiveStatus: 'In Service' },
+            //  ];
+            //const dummyLocationName = "Dummy Location";
 
-            setPlans(dummyPlans);
-            setLocationName(dummyLocationName);
+            //setPlans(dummyPlans);
+            //setLocationName(dummyLocationName);
 		}
 	}, [mileage]);
+
+    function getAllPlans() {
+		listPlans(regionId, chopCode, mileage).then((response) => {
+			setPlans(response.data);
+		}).catch(error => {
+			console.error(error);
+		});
+	}
 
 	function back() {
 		navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations`);
@@ -46,7 +58,11 @@ const DCListPlan = () => {
 	function removePlan(drawingNumber) {
 		console.log(drawingNumber);
 
-		// remove plan logic here
+		deletePlan(regionId, chopCode, mileage, drawingNumber).then(() => {
+			getAllPlans();
+		}).catch(error => {
+			console.error(error);
+		})
 	}
 
     // NOTE: the keys might need to be modified since only one is listed here but there are multiple
