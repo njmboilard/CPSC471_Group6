@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-import {listPlans} from "../../services/RegionService.js";
+import {getArchivePlan, getLocation, listPlans} from "../../services/RegionService.js";
 
 const RDListPlan = () => {
 
@@ -12,12 +12,30 @@ const RDListPlan = () => {
 
     useEffect(() => {
         if (mileage) {
-            // Fetch plans
-            listPlans(regionId, chopCode, mileage).then((response) => {
-				setPlans(response.data);
-			}).catch(error => {
-				console.error(error);
-			});
+	        // Fetch plans
+	        listPlans(regionId, chopCode, mileage).then((response) => {
+		        const plans = response.data;
+
+		        // Fetch ArchivePlan for each Plan
+		        const fetchArchivePlans = plans.map(plan =>
+			        getArchivePlan(regionId, chopCode, mileage, plan.drawingNumber)
+				        .then(archiveResponse => ({
+					        ...plan,
+					        ...archiveResponse.data // Merge ArchivePlan data into Plan
+				        }))
+				        .catch(error => {
+					        console.error(`Error fetching archive plan for ${plan.drawingNumber}:`, error);
+					        return { ...plan }; // Return Plan data if ArchivePlan fetch fails
+				        })
+		        );
+
+		        // Wait for all ArchivePlan fetches to complete
+		        Promise.all(fetchArchivePlans).then((combinedPlans) => {
+			        setPlans(combinedPlans);
+		        });
+	        }).catch(error => {
+		        console.error("Error fetching plans:", error.response?.data || error.message);
+	        });
 
             // Fetch location name
 			getLocation(regionId, chopCode, mileage).then((response) => {
@@ -67,8 +85,11 @@ const RDListPlan = () => {
                                 <td>{plan.mileage}</td>
                                 <td>{plan.drawingNumber}</td>
                                 <td>{plan.uploadDate}</td>
-                                <td>{plan.assignedStatus}</td>
-                                <td>{plan.archiveStatus}</td>
+                                <td>{plan.assignedStatus
+	                                    ? <span style={{color: "red"}}>Assigned</span>
+	                                    : <span style={{color: "green"}}>Not Assigned</span>
+								}</td>
+	                            <td>{plan.archiveStatus}</td>
                             </tr>
                         )
                     }
