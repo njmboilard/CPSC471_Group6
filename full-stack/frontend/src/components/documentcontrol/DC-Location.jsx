@@ -27,16 +27,6 @@ const DCLocation = () => {
 				console.error("Error fetching location:", error.response?.data || error.message);
 			});
 		}
-
-		// if(mileage) {
-		// 	getLocation(regionId, chopCode, mileage).then((response) => {
-		// 		setLocationMileage(response.data.locationMileage);
-		// 		setLocationType(response.data.locationType);
-        // 		setLocationName(response.data.locationName);
-		// 	}).catch(error => {
-		// 		console.error(error);
-		// 	})
-		// }
 	}, [mileage])
 
 	function saveOrUpdateLocation(e) {
@@ -46,7 +36,9 @@ const DCLocation = () => {
 
 			const location = {
 				mileage: locationMileage,
-				locationType: locationType, locationName}
+				locationType: locationType,
+				locationName: locationName
+			}
 			console.log(location)
 
 			if (mileage) {
