@@ -13,10 +13,18 @@ const RDListPlan = () => {
     useEffect(() => {
         if (mileage) {
             // Insert Fetch plans
-
+            //listPlans(regionId, chopCode, mileage).then((response) => {
+			//	setPlans(response.data);
+			//}).catch(error => {
+			//	console.error(error);
+			//});
 
             // Insert Fetch location name
-
+			//getRegion(regionId).then((response) => {
+			//	setRegionName(response.data.name);
+			//}).catch(error => {
+			//	console.error(error);
+			//});
 
             // test data to be deleted after
             const dummyPlans = [
