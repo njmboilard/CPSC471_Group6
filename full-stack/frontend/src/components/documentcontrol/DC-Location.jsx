@@ -4,12 +4,14 @@ import {createLocation, getLocation, updateLocation} from "../../services/Region
 // more imports needed here
 
 const DCLocation = () => {
+	const [locationChopCode, setLocationChopCode] = useState('');
 	const [locationMileage, setLocationMileage] = useState('')
 	const [locationType, setLocationType] = useState('')
     const [locationName, setLocationName] = useState('')
 	const {id : regionId, chopcode : chopCode, mileage} = useParams();
 
 	const [errors, setErrors] = useState({
+		locationChopCode: '',
 		locationMileage: '',
 		locationType: '',
         locationName: ''
@@ -20,6 +22,7 @@ const DCLocation = () => {
 	useEffect(() => {
 		if (mileage) {
 			getLocation(regionId, chopCode, mileage).then((response) => {
+				setLocationChopCode(response.data.chopCode);
 				setLocationMileage(response.data.mileage);
 				setLocationType(response.data.locationType);
 				setLocationName(response.data.locationName);
@@ -27,7 +30,7 @@ const DCLocation = () => {
 				console.error("Error fetching location:", error.response?.data || error.message);
 			});
 		}
-	}, [mileage])
+	}, [chopCode, mileage])
 
 	function saveOrUpdateLocation(e) {
 		e.preventDefault();
@@ -35,6 +38,7 @@ const DCLocation = () => {
 		if (validateForm()) {
 
 			const location = {
+				chopCode: locationChopCode,
 				mileage: locationMileage,
 				locationType: locationType,
 				locationName: locationName
@@ -64,6 +68,13 @@ const DCLocation = () => {
 	function validateForm() {
 		let valid = true;
 		const errorsCopy = {... errors}
+
+		if (locationChopCode.trim()) {
+			errorsCopy.locationChopCode = '';
+		} else {
+			errorsCopy.locationChopCode = 'CHOP Code is required';
+			valid = false;
+		}
 
 		if (locationMileage.trim()) {
 			errorsCopy.locationMileage = '';
@@ -112,6 +123,17 @@ const DCLocation = () => {
 					<div className="card-body">
 						<form>
 							<div className="form-group mb-3">
+								<label className="form-label">CHOP Code</label>
+								<input
+									type="text"
+									placeholder="CHOP Code"
+									name="chopCode"
+									value={locationChopCode}
+									className={`form-control ${errors.locationChopCode ? 'is-invalid' : ''}`}
+									onChange={(e) => setLocationChopCode(e.target.value)}
+								>
+								</input>
+
 								<label className="form-label">Mileage</label>
 								<input
 									type="text"
@@ -122,8 +144,9 @@ const DCLocation = () => {
 									onChange={(e) => setLocationMileage(e.target.value)}
 								>
 								</input>
-								
-								{errors.locationMileage && <div className="invalid-feedback">{errors.locationMileage}</div>}
+
+								{errors.locationMileage &&
+									<div className="invalid-feedback">{errors.locationMileage}</div>}
 							</div>
 							<div className="form-group mb-3">
 								<label className="form-label">Location Type</label>
