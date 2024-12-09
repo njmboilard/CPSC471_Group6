@@ -14,6 +14,11 @@ const RDListProject = () => {
 
 	function getAllProjects() {
 		// Insert Fetch projects
+        //listProjects(projectId).then((response) => {
+			//	setProjects(response.data);
+			//}).catch(error => {
+			//	console.error(error);
+			//});
 
 		// test data to be deleted after
 		const dummyProjects = [
