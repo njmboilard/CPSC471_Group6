@@ -40,8 +40,9 @@ public class RegionServiceImpl implements RegionService {
 
 	@Override
 	public RegionDto getRegionById(int regionId) {
-		Region region = regionRepository.findById(regionId).orElseThrow(() ->
-				new ResourceNotFoundException("Region " + regionId + " not found."));
+		Region region = regionRepository.findById(regionId).orElseThrow(
+				() -> new ResourceNotFoundException("Region " + regionId + " not found.")
+		);
 		return RegionMapper.mapToRegionDto(region);
 	}
 

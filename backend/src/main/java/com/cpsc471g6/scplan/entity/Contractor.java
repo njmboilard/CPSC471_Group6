@@ -1,6 +1,5 @@
 package com.cpsc471g6.scplan.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,16 +14,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "region")
-public class Region {
+@Table(name = "contractor")
+public class Contractor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Column(name="name", nullable = false, unique = true)
+	@Column(name = "name", nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
-	private List<Subdivision> subdivisions = new ArrayList<>();
+	@OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ContractDesigner> contractDesigners = new ArrayList<>();
 }

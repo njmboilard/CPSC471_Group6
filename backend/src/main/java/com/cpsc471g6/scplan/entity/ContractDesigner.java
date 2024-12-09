@@ -1,6 +1,5 @@
 package com.cpsc471g6.scplan.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,22 +16,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "subdivision")
-
-public class Subdivision {
+@Table(name = "contract_designer")
+public class ContractDesigner {
 	@Id
-	@Column(name="chop_code", nullable = false, unique = true)
-	private String chopCode;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private int id;
 
-	@Column(name="name", nullable = false, unique = true)
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="region_id", nullable = false)
+	@JoinColumn(name = "contractor_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.RESTRICT)
-	@JsonIgnore
-	private Region region;
+	private Contractor contractor;
 
-	@OneToMany(mappedBy = "subdivision", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Location> locations = new ArrayList<>();
+	@OneToMany(mappedBy = "contractDesigner", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ContractedOn> contractedOnList = new ArrayList<>();
 }

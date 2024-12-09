@@ -49,6 +49,6 @@ public class RegionController {
 	@DeleteMapping("{id}")
 	public ResponseEntity<String> deleteRegion(@PathVariable("id") int regionId) {
 		regionService.deleteRegion(regionId);
-		return ResponseEntity.ok("Region " + regionId + "deleted successfully.");
+		return ResponseEntity.ok("Region " + regionId + " deleted successfully.");
 	}
 }

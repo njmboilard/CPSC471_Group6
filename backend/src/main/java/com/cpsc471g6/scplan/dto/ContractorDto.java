@@ -11,9 +11,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubdivisionDto {
-	private String chopCode;
+
+public class ContractorDto {
+	private int id;
 	private String name;
-	private int regionId;
-	private List<LocationDto> locations;
+	private List<ContractDesignerDto> contractDesigners;
 }

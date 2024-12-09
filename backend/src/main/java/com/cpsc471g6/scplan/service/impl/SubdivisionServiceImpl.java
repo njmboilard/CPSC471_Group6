@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,10 +33,12 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
 	@Override
 	public SubdivisionDto getSubdivisionByChopCode(int regionId, String chopCope) {
-		Region region = regionRepository.findById(regionId).orElseThrow(() ->
-				new ResourceNotFoundException("Region " + regionId + " not found."));
-		Subdivision subdivision = subdivisionRepository.findById(chopCope).orElseThrow(() ->
-				new ResourceNotFoundException("Subdivision " + chopCope + " not found."));
+		Region region = regionRepository.findById(regionId).orElseThrow(
+				() -> new ResourceNotFoundException("Region " + regionId + " not found.")
+		);
+		Subdivision subdivision = subdivisionRepository.findById(chopCope).orElseThrow(
+				() -> new ResourceNotFoundException("Subdivision " + chopCope + " not found.")
+		);
 		if (subdivision.getRegion().getId() != (region.getId())) {
 			throw new ResourceNotFoundException("Subdivision " + chopCope + " does not belong to region " + region.getId() + ".");
 		}
@@ -46,18 +47,21 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
 	@Override
 	public List<SubdivisionDto> getAllSubdivisions(int regionId) {
-		Region region = regionRepository.findById(regionId).orElseThrow(() ->
-				new ResourceNotFoundException("Region " + regionId + " not found."));
+		Region region = regionRepository.findById(regionId).orElseThrow(
+				() -> new ResourceNotFoundException("Region " + regionId + " not found.")
+		);
 		List<Subdivision> subdivisions = region.getSubdivisions();
 		return subdivisions.stream().map(SubdivisionMapper::mapToSubdivisionDto).collect(Collectors.toList());
 	}
 
 	@Override
 	public SubdivisionDto updateSubdivision(int regionId, String chopCope, SubdivisionDto subdivisionDto) {
-		Region region = regionRepository.findById(regionId).orElseThrow(() ->
-				new ResourceNotFoundException("Region " + regionId + " not found."));
-		Subdivision subdivision = subdivisionRepository.findById(chopCope).orElseThrow(() ->
-				new ResourceNotFoundException("Subdivision " + chopCope + " not found."));
+		Region region = regionRepository.findById(regionId).orElseThrow(
+				() -> new ResourceNotFoundException("Region " + regionId + " not found.")
+		);
+		Subdivision subdivision = subdivisionRepository.findById(chopCope).orElseThrow(
+				() -> new ResourceNotFoundException("Subdivision " + chopCope + " not found.")
+		);
 		if (subdivision.getRegion().getId() != (region.getId())) {
 			throw new ResourceNotFoundException("Subdivision " + chopCope + " does not belong to region " + region.getId() + ".");
 		}
@@ -68,10 +72,12 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
 	@Override
 	public void deleteSubdivision(int regionId, String chopCope) {
-		Region region = regionRepository.findById(regionId).orElseThrow(() ->
-				new ResourceNotFoundException("Region " + regionId + " not found."));
-		Subdivision subdivision = subdivisionRepository.findById(chopCope).orElseThrow(() ->
-				new ResourceNotFoundException("Subdivision " + chopCope + " not found."));
+		Region region = regionRepository.findById(regionId).orElseThrow(
+				() -> new ResourceNotFoundException("Region " + regionId + " not found.")
+		);
+		Subdivision subdivision = subdivisionRepository.findById(chopCope).orElseThrow(
+				() -> new ResourceNotFoundException("Subdivision " + chopCope + " not found.")
+		);
 		if (subdivision.getRegion().getId() != (region.getId())) {
 			throw new ResourceNotFoundException("Subdivision " + chopCope + " does not belong to region " + region.getId() + ".");
 		}

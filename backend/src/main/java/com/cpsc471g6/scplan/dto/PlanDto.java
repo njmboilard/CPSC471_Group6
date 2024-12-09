@@ -5,15 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubdivisionDto {
+
+public class PlanDto {
 	private String chopCode;
-	private String name;
-	private int regionId;
-	private List<LocationDto> locations;
+	private BigDecimal mileage;
+	private String drawingNumber;
 }
