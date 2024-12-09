@@ -59,7 +59,7 @@ const DCListLocation = () => {
 	function removeLocation(mileage) {
 		console.log(mileage);
 
-		deleteLocation(regionId, chopCode).then((response) => {
+		deleteLocation(regionId, chopCode, mileage).then((response) => {
 			getAllLocations();
 		}).catch(error => {
 			console.error(error);
@@ -93,14 +93,14 @@ const DCListLocation = () => {
 							<tr key={location.mileage}>
 								<td>{location.chopCode}</td>
 								<td>{location.mileage}</td>
-								<td>{location.type}</td>
-                                <td>{location.name}</td>
+								<td>{location.locationType}</td>
+                                <td>{location.locationName}</td>
 								<td>
 									<button className="btn btn-dark" onClick={() => updateLocation(location.mileage)}>Update</button>
 									<button
 										className="btn btn-dark"
 										onClick={() => {
-											if (window.confirm("Are you sure you want to delete location " + location.name + "?")) {
+											if (window.confirm("Are you sure you want to delete location " + location.mileage + "?")) {
 												removeLocation(location.mileage);
 											}
 										}}

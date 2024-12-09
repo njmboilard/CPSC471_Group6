@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-import {getSubdivision, listLocations, listSubdivisions} from "../../services/RegionService.js";
+import {getSubdivision, listLocations} from "../../services/RegionService.js";
 
 const RDListLocation = () => {
 
@@ -71,8 +71,8 @@ const RDListLocation = () => {
 							<tr key={location.mileage}>
                                 <td>{location.chopCode}</td>
 								<td>{location.mileage}</td>
-								<td>{location.type}</td>
-                                <td>{location.name}</td>
+								<td>{location.locationType}</td>
+                                <td>{location.locationName}</td>
 								<td>
 									<button className="btn btn-dark" onClick={() => plan(location.mileage)}>Plans</button>
 								</td>
