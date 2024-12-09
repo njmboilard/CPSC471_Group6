@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-// more imports needed here
+import {listLocations, listSubdivisions} from "../../services/RegionService.js";
 
 const RDListLocation = () => {
 
@@ -13,21 +13,25 @@ const RDListLocation = () => {
     useEffect(() => {
 		if (chopCode) {
 			// Insert Fetch locations
-            
+			listLocations(regionId, chopCode).then((response) => {
+				setLocations(response.data);
+			}).catch(error => {
+				console.error(error);
+			});
 
 			// Insert Fetch subdivision name
 
 
             // test data to be deleted after
-			const dummyLocations = [
-				{ chopCode: "BELL", mileage: '0.25', type: 'Signals - Controlled', name: 'Smiths Falls Centre' },
-				{ chopCode: "BELL", mileage: '1.43', type: 'Grade Crossing Warning System', name: 'Carroll Road' },
-				{ chopCode: "BELL", mileage: '2.00', type: 'Signals - Automatic', name: 'Glenview Road' },
-			  ];
-			const dummySubdivisionName = "Dummy Subdivision";
-
-			setLocations(dummyLocations);
-			setSubdivisionName(dummySubdivisionName);
+			// const dummyLocations = [
+			// 	{ chopCode: "BELL", mileage: '0.25', type: 'Signals - Controlled', name: 'Smiths Falls Centre' },
+			// 	{ chopCode: "BELL", mileage: '1.43', type: 'Grade Crossing Warning System', name: 'Carroll Road' },
+			// 	{ chopCode: "BELL", mileage: '2.00', type: 'Signals - Automatic', name: 'Glenview Road' },
+			//   ];
+			// const dummySubdivisionName = "Dummy Subdivision";
+			//
+			// setLocations(dummyLocations);
+			// setSubdivisionName(dummySubdivisionName);
 		}
 	}, [chopCode]);
 

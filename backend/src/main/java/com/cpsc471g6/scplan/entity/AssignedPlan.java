@@ -12,6 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "assigned_plan")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "plan_type", discriminatorType = DiscriminatorType.STRING)
 
 public class AssignedPlan {
 	@EmbeddedId

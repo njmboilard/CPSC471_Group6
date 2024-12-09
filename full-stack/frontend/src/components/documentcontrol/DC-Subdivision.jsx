@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-// more imports needed here
+import {createSubdivision, getSubdivision, updateSubdivision} from "../../services/RegionService.js";
 
 const DCSubdivision = () => {
 	const [subdivisionChopCode, setSubdivisionChopCode] = useState('')
@@ -15,50 +15,43 @@ const DCSubdivision = () => {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		// commented out since getSubdivision does not exist yet
-
-		//if(chopCode) {
-		//	getSubdivision(chopCode).then((response) => {
-		//		setSubdivisionChopCode(response.data.subdivisionChopCode);
-		//		setSubdivisionName(response.data.subdivisionName);
-		//	}).catch(error => {
-		//		console.error(error);
-		//	})
-		//}
-	}, [chopCode])
+		if(chopCode) {
+			getSubdivision(regionId, chopCode).then((response) => {
+				setSubdivisionChopCode(response.data.chopCode);
+				setSubdivisionName(response.data.name);
+			}).catch(error => {
+				console.error(error);
+			})
+		}
+	}, [regionId, chopCode])
 
 	function saveOrUpdateSubdivision(e) {
 		e.preventDefault();
 
 		if (validateForm()) {
 
-			const subdivision = {regionId, subdivisionChopCode, subdivisionName}
+			const subdivision = {
+				chopCode: subdivisionChopCode,
+				name: subdivisionName
+			}
 			console.log(subdivision)
 
 			if (chopCode) {
 				// update subdivision
-
-				// commented out since updateSubdivision does not exist yet
-				// not sure about parameters hence the (?)
-
-				//updateSubdivision( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator(`/documentcontrol/regions/${regionId}/subdivisions`);
-				//}).catch(error => {
-				//	console.error(error);
-				//})
+				updateSubdivision(regionId, chopCode, subdivision).then((response) => {
+					console.log(response.data);
+					navigator(`/documentcontrol/regions/${regionId}/subdivisions`);
+				}).catch(error => {
+					console.error(error);
+				})
 			} else {
 				// add subdivision
-
-				// commented out since createSubdivision does not exist yet
-				// not sure about parameters hence the (?)
-
-				//createSubdivision( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator(`/documentcontrol/regions/${regionId}/subdivisions`);
-				//}).catch(errors => {
-				//	console.error(errors);
-				//})
+				createSubdivision(regionId, subdivision).then((response) => {
+					console.log(response.data);
+					navigator(`/documentcontrol/regions/${regionId}/subdivisions`);
+				}).catch(errors => {
+					console.error(errors);
+				})
 			}
 		}
 	}

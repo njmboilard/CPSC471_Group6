@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "construction_plan")
 @DiscriminatorValue("CONSTRUCTION") // Discriminator value for ConstructionPlan
 
 public class ConstructionPlan extends AssignedPlan {

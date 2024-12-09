@@ -15,3 +15,15 @@ export const deleteRegion = (regionId) => axios.delete(REST_API_BASE_URL + '/' +
 
 // Subdivision CRUD operations for a specific region
 export const listSubdivisions = (regionId) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions`);
+
+export const createSubdivision = (regionId, subdivision) =>	axios.post(`${REST_API_BASE_URL}/${regionId}/subdivisions`, subdivision);
+
+export const getSubdivision = (regionId, chopCode) =>	axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}`);
+
+export const updateSubdivision = (regionId, chopCode, subdivision) =>	axios.put(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}`, subdivision);
+
+export const deleteSubdivision = (regionId, chopCode) =>	axios.delete(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}`);
+
+// Location CRUD operations for a specific subdivision
+
+export const listLocations = (regionId, chopCode) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations`);

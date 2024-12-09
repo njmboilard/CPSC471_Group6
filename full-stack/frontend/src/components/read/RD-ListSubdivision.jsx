@@ -13,29 +13,29 @@ const RdListSubdivision = () => {
 	useEffect(() => {
 		if (regionId) {
 			// Fetch subdivisions
-			//listSubdivisions(regionId).then((response) => {
-			//	setSubdivisions(response.data);
-			//}).catch(error => {
-			//	console.error(error);
-			//});
+			listSubdivisions(regionId).then((response) => {
+				setSubdivisions(response.data);
+			}).catch(error => {
+				console.error(error);
+			});
 
 			// Fetch region name
-			//getRegion(regionId).then((response) => {
-			//	setRegionName(response.data.name);
-			//}).catch(error => {
-			//	console.error(error);
-			//});
+			getRegion(regionId).then((response) => {
+				setRegionName(response.data.name);
+			}).catch(error => {
+				console.error(error);
+			});
 
 			// test data to be deleted after
-			const dummySubdivisions = [
-				{ regionID: 1, chopCode: 'BELL', name: 'Belleville' },
-				{ regionID: 1, chopCode: 'WINC', name: 'Winchester' },
-				{ regionID: 1, chopCode: 'REDE', name: 'Red Deer' },
-			  ];
-			const dummyRegionName = "Dummy Region";
+			// const dummySubdivisions = [
+			// 	{ regionID: 1, chopCode: 'BELL', name: 'Belleville' },
+			// 	{ regionID: 1, chopCode: 'WINC', name: 'Winchester' },
+			// 	{ regionID: 1, chopCode: 'REDE', name: 'Red Deer' },
+			//   ];
+			// const dummyRegionName = "Dummy Region";
 
-			setSubdivisions(dummySubdivisions);
-			setRegionName(dummyRegionName);
+			// setSubdivisions(dummySubdivisions);
+			// setRegionName(dummyRegionName);
 		}
 	}, [regionId]);
 
@@ -65,7 +65,7 @@ const RdListSubdivision = () => {
 					{
 						subdivisions.map(subdivision =>
 							<tr key={subdivision.chopCode}>
-								<td>{subdivision.regionID}</td>
+								<td>{subdivision.regionId}</td>
 								<td>{subdivision.chopCode}</td>
 								<td>{subdivision.name}</td>
 								<td>

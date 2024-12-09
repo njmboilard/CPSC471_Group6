@@ -30,7 +30,6 @@ import DCListIssue from './components/documentcontrol/DC-ListIssue.jsx';
 import DCIssue from './components/documentcontrol/DC-Issue.jsx';
 import DCListAssignedPlan from './components/documentcontrol/DC-ListAssignedPlan.jsx';
 import DCListPersonnel from './components/documentcontrol/DC-ListPersonnel.jsx';
-import DCPersonnel from './components/documentcontrol/DC-Personnel.jsx';
 import DCProjectManager from './components/documentcontrol/DC-ProjectManager.jsx';
 import DCContractDesigner from './components/documentcontrol/DC-ContractDesigner.jsx';
 import DCInHouseDesigner from './components/documentcontrol/DC-InHouseDesigner.jsx';

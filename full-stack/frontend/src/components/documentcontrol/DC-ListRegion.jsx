@@ -13,19 +13,19 @@ const DCListRegion = () => {
 	}, [])
 
 	function getAllRegions() {
-		//listRegions().then((response) => {
-		//	setRegions(response.data);
-		//}).catch(error => {
-		//	console.log(error);
-		//})
+		listRegions().then((response) => {
+			setRegions(response.data);
+		}).catch(error => {
+			console.log(error);
+		})
 
 		// test data to be deleted after
-		const dummyRegions = [
-			{ id: 1, name: "Canada" },
-			{ id: 2, name: "Utah" },
-			{ id: 3, name: "Soviet Russia"},
-		];
-		setRegions(dummyRegions);
+		// const dummyRegions = [
+		// 	{ id: 1, name: "Canada" },
+		// 	{ id: 2, name: "Utah" },
+		// 	{ id: 3, name: "Soviet Russia"},
+		// ];
+		// setRegions(dummyRegions);
 	}
 
 	function back() {

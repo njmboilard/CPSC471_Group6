@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-// more imports needed here
+import {deleteRegion, deleteSubdivision, getRegion, listSubdivisions} from "../../services/RegionService.js";
 
 const DCListSubdivision = () => {
 
@@ -13,31 +13,35 @@ const DCListSubdivision = () => {
 	useEffect(() => {
 		if (regionId) {
 			// Fetch subdivisions
-			//listSubdivisions(regionId).then((response) => {
-			//	setSubdivisions(response.data);
-			//}).catch(error => {
-			//	console.error(error);
-			//});
+			getAllSubdivisions();
 
 			// Fetch region name
-			//getRegion(regionId).then((response) => {
-			//	setRegionName(response.data.name);
-			//}).catch(error => {
-			//	console.error(error);
-			//});
+			getRegion(regionId).then((response) => {
+				setRegionName(response.data.name);
+			}).catch(error => {
+				console.error(error);
+			});
 
 			// test data to be deleted after
-			const dummySubdivisions = [
-				{ regionID: 1, chopCode: 'BELL', name: 'Belleville' },
-				{ regionID: 1, chopCode: 'WINC', name: 'Winchester' },
-				{ regionID: 1, chopCode: 'REDE', name: 'Red Deer' },
-			  ];
-			const dummyRegionName = "Dummy Region";
+			// const dummySubdivisions = [
+			// 	{ regionID: 1, chopCode: 'BELL', name: 'Belleville' },
+			// 	{ regionID: 1, chopCode: 'WINC', name: 'Winchester' },
+			// 	{ regionID: 1, chopCode: 'REDE', name: 'Red Deer' },
+			//   ];
+			// const dummyRegionName = "Dummy Region";
 
-			setSubdivisions(dummySubdivisions);
-			setRegionName(dummyRegionName);
+			// setSubdivisions(dummySubdivisions);
+			// setRegionName(dummyRegionName);
 		}
 	}, [regionId]);
+
+	function getAllSubdivisions() {
+		listSubdivisions(regionId).then((response) => {
+			setSubdivisions(response.data);
+		}).catch(error => {
+			console.error("Error fetching subdivisions:", error.response?.data || error.message);
+		});
+	}
 
 	function back() {
 		navigator('/documentcontrol/regions');
@@ -54,7 +58,11 @@ const DCListSubdivision = () => {
 	function removeSubdivision(chopCode) {
 		console.log(chopCode);
 
-		// remove subdivison logic here
+		deleteSubdivision(regionId, chopCode).then(() => {
+			getAllSubdivisions();
+		}).catch(error => {
+			console.error(error);
+		})
 	}
 
 	function location(chopCode) {
@@ -80,7 +88,7 @@ const DCListSubdivision = () => {
 					{
 						subdivisions.map(subdivision =>
 							<tr key={subdivision.chopCode}>
-								<td>{subdivision.regionID}</td>
+								<td>{subdivision.regionId}</td>
 								<td>{subdivision.chopCode}</td>
 								<td>{subdivision.name}</td>
 								<td>
