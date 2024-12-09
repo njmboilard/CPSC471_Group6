@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-// more imports needed here
+import {deleteLocation, deleteRegion, getSubdivision, listLocations} from "../../services/RegionService.js";
 
 const DCListLocation = () => {
 
@@ -12,10 +12,15 @@ const DCListLocation = () => {
 
 	useEffect(() => {
 		if (chopCode) {
-			// Insert Fetch locations
+			// Fetch locations
+			getAllLocations();
 
-
-			// Insert Fetch subdivision name
+			// Fetch subdivision name
+			getSubdivision(regionId, chopCode).then((response) => {
+				setSubdivisionName(response.data.name);
+			}).catch(error => {
+				console.error("Error fetching subdivision name:", error.response?.data || error.message);
+			});
 
 
 			// test data to be deleted after
@@ -30,6 +35,14 @@ const DCListLocation = () => {
 			// setSubdivisionName(dummySubdivisionName);
 		}
 	}, [chopCode]);
+
+	function getAllLocations() {
+		listLocations(regionId, chopCode).then((response) => {
+			setLocations(response.data);
+		}).catch(error => {
+			console.error("Error fetching locations:", error.response?.data || error.message);
+		});
+	}
 
 	function back() {
 		navigator(`/documentcontrol/regions/${regionId}/subdivisions`);
@@ -46,7 +59,11 @@ const DCListLocation = () => {
 	function removeLocation(mileage) {
 		console.log(mileage);
 
-		// remove location logic here
+		deleteLocation(regionId, chopCode).then((response) => {
+			getAllLocations();
+		}).catch(error => {
+			console.error(error);
+		})
 	}
 
 	function plan(mileage) {

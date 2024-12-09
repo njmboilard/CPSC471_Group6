@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
+import {createLocation, getLocation, updateLocation} from "../../services/RegionService.js";
 // more imports needed here
 
 const DCLocation = () => {
@@ -17,18 +18,25 @@ const DCLocation = () => {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		// commented out since getLocation does not exist yet
-        // not sure about parameters hence the (?)
+		if (mileage) {
+			getLocation(regionId, chopCode, mileage).then((response) => {
+				setLocationMileage(response.data.mileage);
+				setLocationType(response.data.locationType);
+				setLocationName(response.data.locationName);
+			}).catch(error => {
+				console.error("Error fetching location:", error.response?.data || error.message);
+			});
+		}
 
-		//if(mileage) {
-		//	getLocation( (?) ).then((response) => {
-		//		setLocationMileage(response.data.locationMileage);
-		//		setLocationType(response.data.locationType);
-        //		setLocationName(response.data.locationName);
-		//	}).catch(error => {
-		//		console.error(error);
-		//	})
-		//}
+		// if(mileage) {
+		// 	getLocation(regionId, chopCode, mileage).then((response) => {
+		// 		setLocationMileage(response.data.locationMileage);
+		// 		setLocationType(response.data.locationType);
+        // 		setLocationName(response.data.locationName);
+		// 	}).catch(error => {
+		// 		console.error(error);
+		// 	})
+		// }
 	}, [mileage])
 
 	function saveOrUpdateLocation(e) {
@@ -36,33 +44,27 @@ const DCLocation = () => {
 
 		if (validateForm()) {
 
-			const location = {chopCode, locationMileage, locationType, locationName}
+			const location = {
+				mileage: locationMileage,
+				locationType: locationType, locationName}
 			console.log(location)
 
 			if (mileage) {
 				// update location
-
-				// commented out since updateLocation does not exist yet
-				// not sure about parameters hence the (?)
-
-				//updateLocation( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations`);
-				//}).catch(error => {
-				//	console.error(error);
-				//})
+				updateLocation(regionId, chopCode, mileage, location).then((response) => {
+					console.log(response.data);
+					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations`);
+				}).catch(error => {
+					console.error(error);
+				})
 			} else {
 				// add location
-
-				// commented out since createLocation does not exist yet
-				// not sure about parameters hence the (?)
-
-				//createLocation( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations`);
-				//}).catch(errors => {
-				//	console.error(errors);
-				//})
+				createLocation(regionId, chopCode, location).then((response) => {
+					console.log(response.data);
+					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations`);
+				}).catch(errors => {
+					console.error(errors);
+				})
 			}
 		}
 	}

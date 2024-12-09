@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-import {listLocations, listSubdivisions} from "../../services/RegionService.js";
+import {getSubdivision, listLocations, listSubdivisions} from "../../services/RegionService.js";
 
 const RDListLocation = () => {
 
@@ -12,14 +12,19 @@ const RDListLocation = () => {
 
     useEffect(() => {
 		if (chopCode) {
-			// Insert Fetch locations
+			// Fetch locations
 			listLocations(regionId, chopCode).then((response) => {
 				setLocations(response.data);
 			}).catch(error => {
-				console.error(error);
+				console.error("Error fetching locations:", error.response?.data || error.message);
 			});
 
-			// Insert Fetch subdivision name
+			// Fetch subdivision name
+			getSubdivision(regionId, chopCode).then((response) => {
+				setSubdivisionName(response.data.name);
+			}).catch(error => {
+				console.error("Error fetching subdivision name:", error.response?.data || error.message);
+			});
 
 
             // test data to be deleted after

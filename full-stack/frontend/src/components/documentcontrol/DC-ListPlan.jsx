@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-import {getLocation, listPlans} from "../../services/RegionService.js";
+import {listPlans} from "../../services/RegionService.js";
 
 const DCListPlan = () => {
 
