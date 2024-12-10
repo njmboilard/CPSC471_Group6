@@ -27,6 +27,9 @@ const RDListPersonnel = () => {
             // Insert Fetch field staff
 
 
+            // Insert Fetch project name
+
+
             // test data to be deleted after
             const dummyProjectManager = [
                 { id: 1, name: 'Julius Caesar', department: 'idk roman probably', pmpCertification: "no" },
