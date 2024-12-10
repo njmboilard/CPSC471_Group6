@@ -41,7 +41,7 @@ export const deleteLocation = (regionId, chopCode, mileage) => axios.delete(`${R
 
 
 
-// Plan CRUD operations for a specific location
+// Plan CRUD operations for a specific plan
 
 export const listPlans = (regionId, chopCode, mileage) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
 
