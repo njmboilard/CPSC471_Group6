@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-import {deletePlan, getArchivePlan, getLocation, listPlans} from "../../services/RegionService.js";
+import {deleteArchivePlan, deletePlan, getArchivePlan, getLocation, listPlans} from "../../services/RegionService.js";
 
 const DCListPlan = () => {
 
@@ -77,11 +77,21 @@ const DCListPlan = () => {
 	function removePlan(drawingNumber) {
 		console.log(drawingNumber);
 
-		deletePlan(regionId, chopCode, mileage, drawingNumber).then(() => {
-			getAllPlans();
-		}).catch(error => {
-			console.error(error);
-		})
+		// Delete the ArchivePlan first
+		deleteArchivePlan(regionId, chopCode, mileage, drawingNumber)
+			.then(() => {
+				console.log(`Archive plan for ${drawingNumber} deleted successfully.`);
+				// Then delete the Plan
+				return deletePlan(regionId, chopCode, mileage, drawingNumber);
+			})
+			.then(() => {
+				console.log(`Plan ${drawingNumber} deleted successfully.`);
+				// Refresh the plans list
+				getAllPlans();
+			})
+			.catch(error => {
+				console.error(`Error deleting plan or archive plan for ${drawingNumber}:`, error.response?.data || error.message);
+			});
 	}
 
     // NOTE: the keys might need to be modified since only one is listed here but there are multiple

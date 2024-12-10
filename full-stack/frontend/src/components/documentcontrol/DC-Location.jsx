@@ -80,7 +80,7 @@ const DCLocation = () => {
 			valid = false;
 		}
 
-		if (locationMileage.trim()) {
+		if (String(locationMileage).trim()) {
 			errorsCopy.locationMileage = '';
 		} else {
 			errorsCopy.locationMileage = 'Mileage is required';

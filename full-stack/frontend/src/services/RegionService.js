@@ -42,14 +42,21 @@ export const deleteLocation = (regionId, chopCode, mileage) => axios.delete(`${R
 
 
 // Plan CRUD operations for a specific location
-export const getArchivePlan = (regionId, chopCode, mileage, drawingNumber) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}/archive`);
 
 export const listPlans = (regionId, chopCode, mileage) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
 
 export const createPlan = (regionId, chopCode, mileage, plan) =>	axios.post(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`, plan);
 
+export const createArchivePlan = (regionId, chopCode, mileage, drawingNumber, archivePlan) => axios.post(	`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}/archive`, archivePlan);
+
 export const getPlan = (regionId, chopCode, mileage, drawingNumber) =>	axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`);
+
+export const getArchivePlan = (regionId, chopCode, mileage, drawingNumber) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}/archive`);
 
 export const updatePlan = (regionId, chopCode, mileage, drawingNumber, plan) =>	axios.put(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`, plan);
 
+export const updateArchivePlan = (regionId, chopCode, mileage, drawingNumber, archivePlan) => axios.put(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}/archive`, archivePlan);
+
 export const deletePlan = (regionId, chopCode, mileage, drawingNumber) =>	axios.delete(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`);
+
+export const deleteArchivePlan = (regionId, chopCode, mileage, drawingNumber) => axios.delete(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}/archive`);

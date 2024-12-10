@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-import {createPlan, getArchivePlan, getPlan, updatePlan} from "../../services/RegionService.js";
+import {
+	createArchivePlan,
+	createPlan,
+	getArchivePlan,
+	getPlan,
+	updateArchivePlan,
+	updatePlan
+} from "../../services/RegionService.js";
 
 const DCPlan = () => {
 	const [planDrawingNumber, setPlanDrawingNumber] = useState('')
@@ -31,41 +38,46 @@ const DCPlan = () => {
 		}
 	}, [drawingNumber])
 
-	function saveOrUpdatePlan(e) {
+	async function saveOrUpdatePlan(e) {
 		e.preventDefault();
 
 		if (validateForm()) {
+			const plan = {
+				drawingNumber: planDrawingNumber,
+			};
 
 			const archivePlan = {
-                drawingNumber : planDrawingNumber, 
-                uploadDate : planUploadDate, 
-                assignedStatus : planAssignedStatus, 
-                archiveStatus : planArchiveStatus
-            }
+				uploadDate: planUploadDate,
+				assignedStatus: planAssignedStatus,
+				archiveStatus: planArchiveStatus,
+			};
 
-			if (drawingNumber) {
-				// update plan
-				updatePlan(regionId, chopCode, mileage, drawingNumber, archivePlan).then((response) => {
-					console.log(response.data);
-					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
-				}).catch(error => {
-					console.error(error);
-				})
-			} else {
-				// add plan
-				createPlan(regionId, chopCode, mileage, archivePlan).then((response) => {
-					console.log(response.data);
-					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
-				}).catch(errors => {
-					console.error(errors);
-				})
+			try {
+				if (drawingNumber) {
+					// Update Plan and ArchivePlan sequentially
+					await updatePlan(regionId, chopCode, mileage, drawingNumber, plan);
+					await updateArchivePlan(regionId, chopCode, mileage, drawingNumber, archivePlan);
+					console.log("Update successful");
+				} else {
+					// Create Plan first
+					const response = await createPlan(regionId, chopCode, mileage, plan);
+					const newDrawingNumber = response.data.drawingNumber; // Assuming backend returns drawingNumber
+
+					// Then create ArchivePlan
+					await createArchivePlan(regionId, chopCode, mileage, newDrawingNumber, archivePlan);
+					console.log("Create successful");
+				}
+
+				navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
+			} catch (error) {
+				console.error("Error handling create or update:", error.response?.data || error.message);
 			}
 		}
 	}
 
 	function validateForm() {
 		let valid = true;
-		const errorsCopy = {... errors}
+		const errorsCopy = { ...errors };
 
 		if (planDrawingNumber.trim()) {
 			errorsCopy.planDrawingNumber = '';
@@ -75,20 +87,28 @@ const DCPlan = () => {
 		}
 
 		if (planUploadDate.trim()) {
-			errorsCopy.planUploadDate = '';
+			// Optionally validate if the string is in "YYYY-MM-DD" format
+			const isValidDate = !isNaN(Date.parse(planUploadDate));
+			if (isValidDate) {
+				console.log("Valid date:", planUploadDate);
+			} else {
+				console.error("Invalid date format:", planUploadDate);
+				errorsCopy.planUploadDate = "Invalid date format.";
+				valid = false;
+			}
 		} else {
-			errorsCopy.planUploadDate = 'Upload Date is required';
+			errorsCopy.planUploadDate = "Upload Date is required.";
 			valid = false;
 		}
 
-        if (planAssignedStatus.trim()) {
+		if (planAssignedStatus !== '') {
 			errorsCopy.planAssignedStatus = '';
 		} else {
 			errorsCopy.planAssignedStatus = 'Assigned Status is required';
 			valid = false;
 		}
 
-        if (planArchiveStatus.trim()) {
+		if (planArchiveStatus.trim()) {
 			errorsCopy.planArchiveStatus = '';
 		} else {
 			errorsCopy.planArchiveStatus = 'Archive Status is required';
@@ -131,24 +151,24 @@ const DCPlan = () => {
 									onChange={(e) => setPlanDrawingNumber(e.target.value)}
 								>
 								</input>
-								
+
 								{errors.planDrawingNumber && <div className="invalid-feedback">{errors.planDrawingNumber}</div>}
 							</div>
 							<div className="form-group mb-3">
 								<label className="form-label">Upload Date</label>
 								<input
 									type="date"
-									placeholder="Upload Date"
 									name="uploadDate"
 									value={planUploadDate}
 									className={`form-control ${errors.planUploadDate ? 'is-invalid' : ''}`}
-									onChange={(e) => setPlanUploadDate(e.target.value)}
+									onChange={(e) => setPlanUploadDate(e.target.value)} // Ensure it's a string
 								>
 								</input>
-								
-								{errors.planUploadDate && <div className="invalid-feedback">{errors.planUploadDate}</div>}
+
+								{errors.planUploadDate &&
+									<div className="invalid-feedback">{errors.planUploadDate}</div>}
 							</div>
-                            <div className="form-group mb-3">
+							<div className="form-group mb-3">
 								<label className="form-label">Assigned Status</label>
 								<input
 									type="text"
@@ -159,7 +179,7 @@ const DCPlan = () => {
 									onChange={(e) => setPlanAssignedStatus(e.target.value)}
 								>
 								</input>
-								
+
 								{errors.planAssignedStatus && <div className="invalid-feedback">{errors.planAssignedStatus}</div>}
 							</div>
                             <div className="form-group mb-3">
@@ -173,7 +193,7 @@ const DCPlan = () => {
 									onChange={(e) => setPlanArchiveStatus(e.target.value)}
 								>
 								</input>
-								
+
 								{errors.planArchiveStatus && <div className="invalid-feedback">{errors.planArchiveStatus}</div>}
 							</div>
 							<button className="btn btn-dark mb-2" onClick={saveOrUpdatePlan}>Submit</button>
