@@ -17,8 +17,6 @@ const DCContractDesigner = () => {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		// commented out since getContractDesigner does not exist yet
-
 		//if(contractDesignerId) {
 		//	getProjectManager(contractDesignerId).then((response) => {
         //      setCDCompanyId(response.data.cdCompanyId);
@@ -41,9 +39,6 @@ const DCContractDesigner = () => {
 			if (contractDesignerId) {
 				// update contract designer
 
-				// commented out since updateContractDesigner does not exist yet
-				// not sure about parameters hence the (?)
-
 				//updateContractDesigner( (?) ).then((response) => {
 				//	console.log(response.data);
 				//	navigator(`/documentcontrol/projects/${projectId}/personnel`);
@@ -52,9 +47,6 @@ const DCContractDesigner = () => {
 				//})
 			} else {
 				// add contract designer
-
-				// commented out since createContractDesigner does not exist yet
-				// not sure about parameters hence the (?)
 
 				//createContractDesigner( (?) ).then((response) => {
 				//	console.log(response.data);

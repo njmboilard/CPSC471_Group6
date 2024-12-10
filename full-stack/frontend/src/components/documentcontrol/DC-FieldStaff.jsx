@@ -19,8 +19,6 @@ const DCFieldStaff = () => {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		// commented out since getFieldStaff does not exist yet
-
 		//if(fieldStaffId) {
 		//	getFieldStaff(fieldStaffId).then((response) => {
         //      setFSEmployeeName(response.data.fsEmployeeName);
@@ -44,9 +42,6 @@ const DCFieldStaff = () => {
 			if (fieldStaffId) {
 				// update field staff
 
-				// commented out since updateFieldStaff does not exist yet
-				// not sure about parameters hence the (?)
-
 				//updateFieldStaff( (?) ).then((response) => {
 				//	console.log(response.data);
 				//	navigator(`/documentcontrol/projects/${projectId}/personnel`);
@@ -55,9 +50,6 @@ const DCFieldStaff = () => {
 				//})
 			} else {
 				// add field staff
-
-				// commented out since createFieldStaff does not exist yet
-				// not sure about parameters hence the (?)
 
 				//createFieldStaff( (?) ).then((response) => {
 				//	console.log(response.data);

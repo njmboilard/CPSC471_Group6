@@ -27,7 +27,7 @@ const RDListAssignedPlan = () => {
                 { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FA_JP_1', planType: 'SW', projectId: '1' },
                 { chopCode: 'BELL', mileage: '0.25', drawingNumber: 'BELL001.43FE_SL_1', planType: 'SW', projectId: '1' },
               ];
-            const dummyProjectName = "Dummy Project";
+            const dummyProjectName = "Project";
 
 
             setAssignedPlans(dummyAssignedPlans);

@@ -13,19 +13,19 @@ const RDListProject = () => {
 	}, [])
 
 	function getAllProjects() {
-        listProjects().then((response) => {
-			setProjects(response.data);
-		}).catch(error => {
-			console.error(error);
-		});
+        //listProjects().then((response) => {
+		//	setProjects(response.data);
+		//}).catch(error => {
+		//	console.error(error);
+		//});
 
 		// test data to be deleted after
-		//const dummyProjects = [
-		//	{ id: 1, year: 2024, name: "BELL001.43 - Gate Replacement", status: "Active", dlEmployeeId: "GRE0023" },
-		//	{ id: 2, year: 2024, name: "ELLA121.58 - Switch Upgrade", status: "Active", dlEmployeeId: "POW0111" },
-		//	{ id: 3, year: 2024, name: "REDE001.21 - Relay Replacement", status: "Active", dlEmployeeId: "KET0031" },
-		//];
-		//setProjects(dummyProjects);
+		const dummyProjects = [
+			{ id: 1, year: 2024, name: "BELL001.43 - Gate Replacement", status: "Active", dlEmployeeId: "GRE0023" },
+			{ id: 2, year: 2024, name: "ELLA121.58 - Switch Upgrade", status: "Active", dlEmployeeId: "POW0111" },
+			{ id: 3, year: 2024, name: "REDE001.21 - Relay Replacement", status: "Active", dlEmployeeId: "KET0031" },
+		];
+		setProjects(dummyProjects);
 	}
 
 	function back() {

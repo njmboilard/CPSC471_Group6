@@ -47,9 +47,6 @@ const DCInHouseDesigner = () => {
 			if (inHouseDesignerId) {
 				// update in-house designer
 
-				// commented out since updateInHouseDesigner does not exist yet
-				// not sure about parameters hence the (?)
-
 				//updateInHouseDesigner( (?) ).then((response) => {
 				//	console.log(response.data);
 				//	navigator(`/documentcontrol/projects/${projectId}/personnel`);
@@ -58,9 +55,6 @@ const DCInHouseDesigner = () => {
 				//})
 			} else {
 				// add in house designer
-
-				// commented out since createInHouseDesigner does not exist yet
-				// not sure about parameters hence the (?)
 
 				//createInHouseDesigner( (?) ).then((response) => {
 				//	console.log(response.data);
