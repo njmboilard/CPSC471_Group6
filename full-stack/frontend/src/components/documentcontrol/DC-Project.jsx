@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
+import {createProject, getProject, updateProject} from "../../services/ProjectService.js";
 // more imports needed here
 
 const DCProject = () => {
@@ -24,7 +25,7 @@ const DCProject = () => {
 				setProjectYear(response.data.year);
 				setProjectName(response.data.projectName);
                 setProjectStatus(response.data.projectStatus);
-				setProjectDLEmployeeID(response.data.dlEmployeeId);  // name here might be wrong
+				setProjectDLEmployeeID(response.data.designLead.employeeId);
 			}).catch(error => {
 				console.error(error);
 			})
@@ -37,12 +38,13 @@ const DCProject = () => {
 		if (validateForm()) {
 
 			const project = {
-                //projectId, 
-                year : projectYear, 
-                projectName : projectName, 
-                projectStatus : projectStatus, 
-                dlEmployeeId : projectDLEmployeeID
-            }
+				year: projectYear,
+				projectName: projectName,
+				projectStatus: projectStatus,
+				designLead: {
+					employeeId: parseInt(projectDLEmployeeID, 10),
+				},
+			};
 			console.log(project)
 
 			if (projectId) {

@@ -4,6 +4,7 @@
 	width: 100%;
 	padding: 0 20px;
 	background-color: #C2002F;
+	z-index: 1000;
 }
 
 .footer {
