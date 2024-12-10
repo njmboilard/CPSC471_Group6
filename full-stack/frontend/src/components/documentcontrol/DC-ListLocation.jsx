@@ -24,15 +24,15 @@ const DCListLocation = () => {
 
 
 			// test data to be deleted after
-			// const dummyLocations = [
+			//const dummyLocations = [
 			// 	{ chopCode: "BELL", mileage: '0.25', type: 'Signals - Controlled', name: 'Smiths Falls Centre' },
 			// 	{ chopCode: "BELL", mileage: '1.43', type: 'Grade Crossing Warning System', name: 'Carroll Road' },
 			// 	{ chopCode: "BELL", mileage: '2.00', type: 'Signals - Automatic', name: 'Glenview Road' },
 			//   ];
-			// const dummySubdivisionName = "Dummy Subdivision";
-			//
-			// setLocations(dummyLocations);
-			// setSubdivisionName(dummySubdivisionName);
+			//const dummySubdivisionName = "Dummy Subdivision";
+			
+			//setLocations(dummyLocations);
+			//setSubdivisionName(dummySubdivisionName);
 		}
 	}, [chopCode]);
 

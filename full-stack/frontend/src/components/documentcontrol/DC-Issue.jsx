@@ -41,9 +41,6 @@ const DCIssue = () => {
 			if (issueId) {
 				// update issue
 
-				// commented out since updateIssue does not exist yet
-				// not sure about parameters hence the (?)
-
 				//updateIssue( (?) ).then((response) => {
 				//	console.log(response.data);
 				//	navigator(`/documentcontrol/projects/${projectId}/issues`);
@@ -52,9 +49,6 @@ const DCIssue = () => {
 				//})
 			} else {
 				// add issue
-
-				// commented out since createIssue does not exist yet
-				// not sure about parameters hence the (?)
 
 				//createIssue( (?) ).then((response) => {
 				//	console.log(response.data);

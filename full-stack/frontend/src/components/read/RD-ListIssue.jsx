@@ -20,11 +20,11 @@ const RDListIssue = () => {
 
             // test data to be deleted after
             const dummyIssues = [
-                { id: 1, description: 'death and destruction', status: 'idk', projectId: 1, employeeId: 'PIT0040'},
-                { id: 2, description: 'vast swarms of bees', status: 'hmm', projectId: 1, employeeId: 'PIT0040'},
-                { id: 3, description: 'aggressive geese', status: 'maybe', projectId: 1, employeeId: 'PIT0040'},
+                { id: 1, description: 'Shoddy Materials', status: 'Open', projectId: 1, employeeId: '13'},
+                { id: 2, description: 'Rusty Rails', status: 'Open', projectId: 1, employeeId: '13'},
+                { id: 3, description: 'Electrical Errors', status: 'Open', projectId: 1, employeeId: '24'},
               ];
-            const dummyProjectName = "Dummy Project";
+            const dummyProjectName = "Project";
 
 
             setIssues(dummyIssues);

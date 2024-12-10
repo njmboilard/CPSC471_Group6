@@ -32,23 +32,23 @@ const DCListPersonnel = () => {
 
             // test data to be deleted after
             const dummyProjectManager = [
-                { id: 1, name: 'Julius Caesar', department: 'idk roman probably', pmpCertification: "no" },
+                { id: 1, name: 'Jack Doe', department: 'Project Controls', pmpCertification: "True" },
               ];
             const dummyContractDesigners = [
-                { id: 2, companyId: 1, name: 'Leonardo Da Vinci' },
-                { id: 3, companyId: 5, name: 'Tony Gonzalez' },
-                { id: 4, companyId: 9001, name: 'Bob Barker' },
+                { id: 2, companyId: 1, name: 'Fred Flinstone' },
+                { id: 3, companyId: 4, name: 'Bucky Barnes' },
+                { id: 4, companyId: 3, name: 'Padme Amidala' },
               ];
             const dummyInHouseDesigners = [
-                { id: 5, name: 'Tony Roma', department: 'ribs', pengCertification: "yes", initials: "TR" },
-                { id: 6, name: 'God Zilla', department: 'doom', pengCertification: "yes", initials: "GZ" },
+                { id: 5, name: 'Mace Windu', department: 'Design', pengCertification: "True", initials: "MW" },
+                { id: 6, name: 'Marty McFly', department: 'Design', pengCertification: "True", initials: "MM" },
               ];
             const dummyFieldStaff = [
-                { id: 7, name: 'Zeus', department: 'building stuff', position: "railway guru" },
-                { id: 8, name: 'Bob the Builder', department: 'building stuff', position: "god of railway" },
-                { id: 9, name: 'Dwight', department: 'building stuff', position: "assistant to the railway guru" },
+                { id: 7, name: 'Tony Stark', department: 'Maintenance', position: "Maintainer" },
+                { id: 8, name: 'Jean Grey', department: 'Construction', position: "Manager" },
+                { id: 9, name: 'Alan Grant', department: 'Construction', position: "Wireman" },
               ];
-            const dummyProjectName = "Dummy Project";
+            const dummyProjectName = "Project";
 
 
             setProjectManager(dummyProjectManager);

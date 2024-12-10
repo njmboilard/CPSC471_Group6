@@ -44,9 +44,6 @@ const DCProjectManager = () => {
 			if (projectManagerId) {
 				// update project manager
 
-				// commented out since updateProjectManager does not exist yet
-				// not sure about parameters hence the (?)
-
 				//updateProjectManager( (?) ).then((response) => {
 				//	console.log(response.data);
 				//	navigator(`/documentcontrol/projects/${projectId}/personnel`);
@@ -55,9 +52,6 @@ const DCProjectManager = () => {
 				//})
 			} else {
 				// add project manager
-
-				// commented out since createProjectManager does not exist yet
-				// not sure about parameters hence the (?)
 
 				//createProjectManager( (?) ).then((response) => {
 				//	console.log(response.data);
