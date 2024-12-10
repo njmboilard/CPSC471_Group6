@@ -28,10 +28,10 @@ public class ProjectServiceImpl implements ProjectService {
 		// Set Design Lead if provided
 		if (projectDto.getDesignLead() != null) {
 			Employee employee = employeeRepository.findById(projectDto.getDesignLead().getEmployeeId())
-					.orElseThrow(() -> new ResourceNotFoundException("Employee with ID " + projectDto.getDesignLead().getEmployeeId() + " not found."));
+					.orElseThrow(() -> new ResourceNotFoundException("Employee with ID " + projectDto.getDesignLead().getEmployeeId() + " does not exist."));
 
 			if (employee.getInHouseDesigner() == null) {
-				throw new ResourceNotFoundException("Employee with ID " + projectDto.getDesignLead().getEmployeeId() + " is not an In-House Designer.");
+				throw new ResourceNotFoundException("Employee with ID " + projectDto.getDesignLead().getEmployeeId() + " exists but is not an In-House Designer.");
 			}
 
 			project.setDesignLead(employee.getInHouseDesigner());
