@@ -35,6 +35,8 @@ const DCLocation = () => {
 	function saveOrUpdateLocation(e) {
 		e.preventDefault();
 
+        console.log("Submit button clicked");
+
 		if (validateForm()) {
 
 			const location = {
@@ -43,12 +45,12 @@ const DCLocation = () => {
 				locationType: locationType,
 				locationName: locationName
 			}
-			console.log(location)
+			console.log("Location object: ", location)
 
 			if (mileage) {
 				// update location
 				updateLocation(regionId, chopCode, mileage, location).then((response) => {
-					console.log(response.data);
+					console.log("Update successful: ", response.data);
 					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations`);
 				}).catch(error => {
 					console.error(error);
@@ -56,13 +58,15 @@ const DCLocation = () => {
 			} else {
 				// add location
 				createLocation(regionId, chopCode, location).then((response) => {
-					console.log(response.data);
+					console.log("Create successful: ", response.data);
 					navigator(`/documentcontrol/regions/${regionId}/subdivisions/${chopCode}/locations`);
 				}).catch(errors => {
 					console.error(errors);
 				})
 			}
-		}
+		} else {
+            console.log("Validation failed");
+        }
 	}
 
 	function validateForm() {
@@ -134,6 +138,9 @@ const DCLocation = () => {
 								>
 								</input>
 
+                                {errors.locationChopCode && <div className="invalid-feedback">{errors.locationChopCode}</div>}
+                            </div>
+                            <div className="form-group mb-3">
 								<label className="form-label">Mileage</label>
 								<input
 									type="text"
