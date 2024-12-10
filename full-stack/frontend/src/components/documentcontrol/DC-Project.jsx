@@ -19,18 +19,16 @@ const DCProject = () => {
 	const navigator = useNavigate();
 
 	useEffect(() => {
-		// commented out since getProject does not exist yet
-
-		//if(projectId) {
-		//	getProject(projectId).then((response) => {
-		//		setProjectYear(response.data.projectYear);
-		//		setProjectName(response.data.projectName);
-        //      setProjectStatus(response.data.projectStatus);
-		//		setProjectDLEmployeeID(response.data.projectDLEmployeeID);
-		//	}).catch(error => {
-		//		console.error(error);
-		//	})
-		//}
+		if(projectId) {
+			getProject(projectId).then((response) => {
+				setProjectYear(response.data.year);
+				setProjectName(response.data.projectName);
+                setProjectStatus(response.data.projectStatus);
+				setProjectDLEmployeeID(response.data.dlEmployeeId);  // name here might be wrong
+			}).catch(error => {
+				console.error(error);
+			})
+		}
 	}, [projectId])
 
 	function saveOrUpdateProject(e) {
@@ -38,33 +36,31 @@ const DCProject = () => {
 
 		if (validateForm()) {
 
-			const project = {projectId, projectYear, projectName, projectStatus, projectDLEmployeeID}
+			const project = {
+                //projectId, 
+                year : projectYear, 
+                projectName : projectName, 
+                projectStatus : projectStatus, 
+                dlEmployeeId : projectDLEmployeeID
+            }
 			console.log(project)
 
 			if (projectId) {
 				// update project
-
-				// commented out since updateProject does not exist yet
-				// not sure about parameters hence the (?)
-
-				//updateProject( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator("/documentcontrol/projects");
-				//}).catch(error => {
-				//	console.error(error);
-				//})
+                updateProject(projectId, project).then((response) => {
+					console.log(response.data);
+					navigator("/documentcontrol/projects");
+				}).catch(error => {
+					console.error(error);
+				})
 			} else {
 				// add project
-
-				// commented out since createProject does not exist yet
-				// not sure about parameters hence the (?)
-
-				//createProject( (?) ).then((response) => {
-				//	console.log(response.data);
-				//	navigator("/documentcontrol/projects");
-				//}).catch(errors => {
-				//	console.error(errors);
-				//})
+				createProject(project).then((response) => {
+					console.log(response.data);
+					navigator("/documentcontrol/projects");
+				}).catch(errors => {
+					console.error(errors);
+				})
 			}
 		}
 	}
@@ -173,7 +169,7 @@ const DCProject = () => {
 								<input
 									type="text"
 									placeholder="Project DL Employee ID"
-									name="dlEmployeeID" // idk if this name is right
+									name="dlEmployeeId" // idk if this name is right
 									value={projectDLEmployeeID}
 									className={`form-control ${errors.projectDLEmployeeID ? 'is-invalid' : ''}`}
 									onChange={(e) => setProjectDLEmployeeID(e.target.value)}
