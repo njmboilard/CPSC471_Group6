@@ -5,43 +5,76 @@ const REST_API_BASE_URL = 'http://localhost:8080/api/projects';
 // Project CRUD operations for a project
 export const listProjects = () => axios.get(REST_API_BASE_URL);
 
-export const createProject = (region) => axios.post(REST_API_BASE_URL, region);
+export const createProject = (project) => axios.post(REST_API_BASE_URL, project);
 
-export const getProject = (regionId) => axios.get(REST_API_BASE_URL + '/' + regionId);
+export const getProject = (projectId) => axios.get(REST_API_BASE_URL + '/' + projectId);
 
-export const updateProject = (regionId, region) => axios.put(REST_API_BASE_URL + '/' + regionId, region);
+export const updateProject = (projectId, project) => axios.put(REST_API_BASE_URL + '/' + projectId, project);
 
-export const deleteProject = (regionId) => axios.delete(REST_API_BASE_URL + '/' + regionId);
+export const deleteProject = (projectId) => axios.delete(REST_API_BASE_URL + '/' + projectId);
 
-// Subdivision CRUD operations for a specific project
-export const listSubdivisions = (regionId) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions`);
+// Project Manager CRUD operations for a specific project
+export const listProjectManager = (projectId) => axios.get(`${REST_API_BASE_URL}/${projectId}/projectManagers`);
 
-export const createSubdivision = (regionId, subdivision) =>	axios.post(`${REST_API_BASE_URL}/${regionId}/subdivisions`, subdivision);
+export const createProjectManager = (projectId, projectManager) =>	axios.post(`${REST_API_BASE_URL}/${projectId}/projectManagers`, projectManager);
 
-export const getSubdivision = (regionId, chopCode) =>	axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}`);
+export const getProjectManager = (projectId, employeeId) =>	axios.get(`${REST_API_BASE_URL}/${projectId}/projectManagers/${employeeId}`);
 
-export const updateSubdivision = (regionId, chopCode, subdivision) =>	axios.put(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}`, subdivision);
+export const updateProjectManager = (projectId, employeeId, projectManager) =>	axios.put(`${REST_API_BASE_URL}/${projectId}/projectManagers/${employeeId}`, projectManager);
 
-export const deleteSubdivision = (regionId, chopCode) =>	axios.delete(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}`);
+export const deleteProjectManager = (projectId, employeeId) =>	axios.delete(`${REST_API_BASE_URL}/${projectId}/projectManagers/${employeeId}`);
 
-// Location CRUD operations for a specific project
-export const listLocations = (regionId, chopCode) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations`);
+// Contract Designer CRUD operations for a specific project
+export const listContractDesigner = (projectId) => axios.get(`${REST_API_BASE_URL}/${projectId}/contractDesigners`);
 
-export const createLocation = (regionId, chopCode, location) => axios.post(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations`, location);
+export const createContractDesigner = (projectId, contractDesigner) =>	axios.post(`${REST_API_BASE_URL}/${projectId}/contractDesigners`, contractDesigner);
 
-export const getLocation = (regionId, chopCode, mileage) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}`);
+export const getContractDesigner = (projectId, contractorId) =>	axios.get(`${REST_API_BASE_URL}/${projectId}/contractDesigners/${contractorId}`);
 
-export const updateLocation = (regionId, chopCode, mileage, location) => axios.put(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}`, location);
+export const updateContractDesigner = (projectId, contractorId, contractDesigner) =>	axios.put(`${REST_API_BASE_URL}/${projectId}/contractDesigners/${contractorId}`, contractDesigner);
 
-export const deleteLocation = (regionId, chopCode, mileage) => axios.delete(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}`);
+export const deleteContractDesigner = (projectId, employeeId) =>	axios.delete(`${REST_API_BASE_URL}/${projectId}/contractDesigners/${employeeId}`);
 
-// Plan CRUD operations for a specific project
-export const listPlans = (regionId, chopCode, mileage) => axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`);
+// Field Staff CRUD operations for a specific project
+export const listInHouseDesigner = (projectId) => axios.get(`${REST_API_BASE_URL}/${projectId}/inHouseDesigners`);
 
-export const createPlan = (regionId, chopCode, mileage, plan) =>	axios.post(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans`, plan);
+export const createInHouseDesigner = (projectId, inHouseDesigner) =>	axios.post(`${REST_API_BASE_URL}/${projectId}/inHouseDesigners`, inHouseDesigner);
 
-export const getPlan = (regionId, chopCode, mileage, drawingNumber) =>	axios.get(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`);
+export const getInHouseDesigner = (projectId, employeeId) =>	axios.get(`${REST_API_BASE_URL}/${projectId}/inHouseDesigners/${employeeId}`);
 
-export const updatePlan = (regionId, chopCode, mileage, drawingNumber, plan) =>	axios.put(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`, plan);
+export const updateInHouseDesigner = (projectId, employeeId, inHouseDesigner) =>	axios.put(`${REST_API_BASE_URL}/${projectId}/inHouseDesigners/${employeeId}`, inHouseDesigner);
 
-export const deletePlan = (regionId, chopCode, mileage, drawingNumber) =>	axios.delete(`${REST_API_BASE_URL}/${regionId}/subdivisions/${chopCode}/locations/${mileage}/plans/${drawingNumber}`);
+export const deleteInHouseDesigner = (projectId, employeeId) =>	axios.delete(`${REST_API_BASE_URL}/${projectId}/inHouseDesigners/${employeeId}`);
+
+// Document Controller CRUD operations for a specific project
+export const listFieldStaff = (projectId) => axios.get(`${REST_API_BASE_URL}/${projectId}/fieldStaff`);
+
+export const createFieldStaff = (projectId, fieldStaff) =>	axios.post(`${REST_API_BASE_URL}/${projectId}/fieldStaff`, fieldStaff);
+
+export const getFieldStaff = (projectId, employeeId) =>	axios.get(`${REST_API_BASE_URL}/${projectId}/fieldStaff/${employeeId}`);
+
+export const updateFieldStaff = (projectId, employeeId, fieldStaff) =>	axios.put(`${REST_API_BASE_URL}/${projectId}/fieldStaff/${employeeId}`, fieldStaff);
+
+export const deleteFieldStaff = (projectId, employeeId) =>	axios.delete(`${REST_API_BASE_URL}/${projectId}/fieldStaff/${employeeId}`);
+
+// Issue CRUD operations for a specific project
+export const listIssues = (projectId) => axios.get(`${REST_API_BASE_URL}/${projectId}/issues`);
+
+export const createIssues = (projectId, issue) => axios.post(`${REST_API_BASE_URL}/${projectId}/issues`, issue);
+
+export const getIssues = (projectId, issueId) => axios.get(`${REST_API_BASE_URL}/${projectId}/issues/${issueId}`);
+
+export const updateIssues = (projectId, issueId, issue) => axios.put(`${REST_API_BASE_URL}/${projectId}/issues/${issueId}`, issue);
+
+export const deleteIssues = (projectId, issueId) => axios.delete(`${REST_API_BASE_URL}/${projectId}/issues/${issueId}`);
+
+// Assigned Plan CRUD operations for a specific project
+export const listAssignedPlans = (projectId) => axios.get(`${REST_API_BASE_URL}/${projectId}/assignedPlans`);
+
+export const createAssignedPlan = (projectId, assignedPlan) =>	axios.post(`${REST_API_BASE_URL}/${projectId}/assignedPlans/${drawingNumber}`, assignedPlan);
+
+export const getAssignedPlan = (projectId, drawingNumber) =>	axios.get(`${REST_API_BASE_URL}/${projectId}/assignedPlans/${drawingNumber}`);
+
+export const updateAssignedPlan = (projectId, drawingNumber, assignedPlan) =>	axios.put(`${REST_API_BASE_URL}/${projectId}/assignedPlans/${drawingNumber}`, assignedPlan);
+
+export const deleteAssignedPlan = (projectId, drawingNumber) =>	axios.delete(`${REST_API_BASE_URL}/${projectId}/assignedPlans/${drawingNumber}`);
